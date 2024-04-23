@@ -1,15 +1,18 @@
 import React from "react";
-function App() {
+import { Routes, Route } from "react-router-dom";
+import Goods from "./page/Goods";
+
+const App: React.FC = () => {
   return (
     <div className="App">
-      <div style={{ textAlign: "center" }}>
-        <img
-          src="https://i.pinimg.com/564x/99/8a/d7/998ad76c8af67cffb3f6e7f239e791ab.jpg"
-          alt=""
-        />
-      </div>
+      {/* TODO Header 삽입 */}
+      {/* <Header /> */}
+      <Routes>
+        <Route path="/goods" element={<Goods />} />
+        {/* 각자 완성한 페이지 path 및 element 삽입 */}
+      </Routes>
     </div>
   );
-}
+};
 
 export default App;
