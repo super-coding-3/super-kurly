@@ -40,7 +40,6 @@ const CategoryDropdown = styled.div<CategoryDropdownProps>`
   width: 200px;
   background-color: white;
   border: 1px solid #ccc;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   padding: 10px 10px;
   z-index: 1;
   display: ${(props) => (props.show ? "block" : "none")};
