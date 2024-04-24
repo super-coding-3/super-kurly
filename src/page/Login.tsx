@@ -3,16 +3,16 @@ import styled from "styled-components";
 
 import LoginForm from "../components/login/LoginForm";
 
-function Login() {
+function Login(): JSX.Element {
   return (
-    <LoginContainer>
+    <Container>
       <LoginTitle>로그인</LoginTitle>
       <LoginForm />
-    </LoginContainer>
+    </Container>
   );
 }
 
-const LoginContainer = styled.div`
+export const Container = styled.div`
   min-width: 1050px;
   margin-top: 90px;
   margin-bottom: 60px;

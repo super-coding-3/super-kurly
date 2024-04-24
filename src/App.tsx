@@ -1,6 +1,8 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+
 import Login from "./page/Login";
+import SignUp from "./page/SignUp";
 import Goods from "./page/Goods";
 
 const App: React.FC = () => {
@@ -10,6 +12,7 @@ const App: React.FC = () => {
       {/* <Header /> */}
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/goods" element={<Goods />} />
         {/* 각자 완성한 페이지 path 및 element 삽입 */}
       </Routes>

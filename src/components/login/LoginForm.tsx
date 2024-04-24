@@ -18,7 +18,7 @@ const validationSchema = Yup.object({
     .min(6, "비밀번호는 최소 6자리 이상이어야 합니다"),
 });
 
-const LoginForm = () => {
+function LoginForm(): JSX.Element {
   const navigate = useNavigate();
 
   const onSubmitHandler = (
@@ -86,7 +86,7 @@ const LoginForm = () => {
       </Formik>
     </LoginFormik>
   );
-};
+}
 
 const LoginFormik = styled.div`
   width: 340px;
