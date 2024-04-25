@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-// import RightArrow from "../../../../public/img/goods/RightArrow.svg";
+import GoodsInfo from "./GoodsInfo";
+import GoodsPurchase from "./GoodsPurchase";
 
 const GoodsMainSection: React.FC = () => {
   return (
@@ -50,11 +51,14 @@ const GoodsMainSection: React.FC = () => {
         <div id="accumulate">358원 적립</div>
       </GoodsAccumulate>
       <GoodsMemberShipBtn>
-        <div>컬리멤버스 지금 시작하면 3개월 0원</div>
-        <img src={process.env.PUBLIC_URL + "/img/goods/RightArrow.svg"} />
+        <div>
+          컬리멤버스 지금 시작하면 3개월 <em>0원</em>
+        </div>
+        <img src="/img/goods/RightArrow.svg" />
       </GoodsMemberShipBtn>
       <GoodsCouponBtn>
         <div>CJ브랜드위크 5천원 쿠폰 받기</div>
+        <img src="/img/goods/RightArrow.svg" />
       </GoodsCouponBtn>
       <GoodsInfo />
       <GoodsPurchase />
@@ -75,7 +79,7 @@ const GoodsMainSectionWrap = styled.div`
 const GoodsDelivery = styled.div`
   color: rgb(153, 153, 153);
   margin-bottom: 20px;
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: -0.5px;
 `;
 
@@ -85,7 +89,7 @@ const GoodsTitle = styled.div`
   position: relative;
   font-size: 14px;
   h1 {
-    font-weight: 700;
+    font-weight: 500;
     font-size: 24px;
     color: rgb(51, 51, 51);
   }
@@ -190,16 +194,32 @@ const GoodsMemberShipBtn = styled.button`
   width: 350px;
   border-radius: 4px;
   margin-top: 15px;
-  padding: 10px 14px 10px 16px;
+  padding: 15px 14px 15px 16px;
   background-color: rgba(189, 118, 255, 0.08);
-  div {
+  em {
     color: #5f0080;
-    font-weight: 700;
+    font-weight: 600;
+  }
+  img {
+    width: 18px;
+    height: 18px;
   }
 `;
 
-const GoodsCouponBtn = styled.div``;
-
-const GoodsInfo = styled.div``;
-
-const GoodsPurchase = styled.div``;
+const GoodsCouponBtn = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 350px;
+  height: 44px;
+  margin-top: 20px;
+  border: 1px solid rgb(141, 76, 196);
+  border-radius: 4px;
+  color: rgb(95, 0, 128);
+  font-size: 15px;
+  font-weight: 500;
+  img {
+    width: 18px;
+    height: 18px;
+  }
+`;
