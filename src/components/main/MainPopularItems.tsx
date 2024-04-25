@@ -2,73 +2,82 @@ import styled from "styled-components";
 import { IoCartOutline } from "react-icons/io5";
 import { GrNext } from "react-icons/gr";
 import { GrPrevious } from "react-icons/gr";
+import { BsChatSquareText } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
 const mockData = [
   {
     id: 1,
-    image: "https://via.placeholder.com/200",
+    image: "/img/main/kurly-items1.jpg",
     name: "상품 1",
     originalPrice: "11500원",
     discount: "15%",
     price: "10,000원",
+    reviewCount: "9999+",
   },
   {
     id: 2,
-    image: "https://via.placeholder.com/200",
+    image: "/img/main/kurly-items2.jpg",
     name: "상품 2",
     originalPrice: "20000원",
     discount: "30%",
     price: "15,000원",
+    reviewCount: "999+",
   },
   {
     id: 3,
-    image: "https://via.placeholder.com/200",
+    image: "/img/main/kurly-items3.jpg",
     name: "상품 3",
     originalPrice: "20000원",
     discount: "15%",
     price: "20,000원",
+    reviewCount: "9999+",
   },
   {
     id: 4,
-    image: "https://via.placeholder.com/200",
+    image: "/img/main/kurly-items4.jpg",
     name: "상품 4",
     originalPrice: "30000원",
     discount: "20%",
     price: "25,000원",
+    reviewCount: "99+",
   },
   {
     id: 5,
-    image: "https://via.placeholder.com/200",
+    image: "/img/main/kurly-items5.jpg",
     name: "상품 5",
     originalPrice: "35000원",
     discount: "15%",
     price: "30,000원",
+    reviewCount: "9999+",
   },
   {
     id: 6,
-    image: "https://via.placeholder.com/200",
+    image: "/img/main/kurly-items6.jpg",
     name: "상품 6",
     originalPrice: "40000원",
     discount: "25%",
     price: "35,000원",
+    reviewCount: "999+",
   },
   {
     id: 7,
-    image: "https://via.placeholder.com/200",
+    image: "/img/main/kurly-items7.jpg",
     name: "상품 7",
     originalPrice: "48000원",
     discount: "15%",
     price: "40,000원",
+    reviewCount: "9999+",
   },
   {
     id: 8,
-    image: "https://via.placeholder.com/200",
+    image: "/img/main/kurly-items8.jpg",
     name: "상품 8",
     originalPrice: "50000원",
     discount: "15%",
     price: "45,000원",
+    reviewCount: "9999+",
   },
 ];
 
@@ -184,6 +193,14 @@ const ItemPriceWrapper = styled.div`
 const ItemReviewWrapper = styled.div`
   width: 100%;
   height: 28px;
+  font-size: 13px;
+  font-weight: 400;
+  color: #999999;
+  display: flex;
+  align-items: center;
+  span {
+    margin-left: 3px;
+  }
 `;
 
 const PrevNextButtonContainer = styled.div`
@@ -314,7 +331,10 @@ const MainPopularItems = () => {
                   <span>{item.discount}</span>
                   <span>{item.price}</span>
                 </ItemPriceWrapper>
-                <ItemReviewWrapper>리뷰</ItemReviewWrapper>
+                <ItemReviewWrapper>
+                  <BsChatSquareText />
+                  <span>{item.reviewCount}</span>
+                </ItemReviewWrapper>
               </PopularItemsContentWrapper>
             </PopularItemsGridContainer>
           ))}
