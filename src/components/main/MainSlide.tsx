@@ -11,11 +11,42 @@ const images = [
   "/img/main/kurly-image5.jpg",
 ];
 
+const NextButton = styled.button`
+  position: absolute;
+  top: 50%;
+  right: 100px;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  opacity: 0;
+`;
+
+const PrevButton = styled.button`
+  position: absolute;
+  top: 50%;
+  left: 40px;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  opacity: 0;
+`;
+
 const MainCarouselContainer = styled.div`
   width: 100vw;
   height: 370px;
   position: relative;
   overflow: hidden;
+
+  &:hover ${NextButton}, &:hover ${PrevButton} {
+    opacity: 1;
+    transition: opacity 0.3s;
+  }
 `;
 
 const MainCarouselImage = styled.img`
@@ -24,25 +55,31 @@ const MainCarouselImage = styled.img`
   object-fit: cover;
 `;
 
-const NextButton = styled.button`
-  position: absolute;
-  top: 50%;
-  right: 40px;
-  transform: translateY(-50%);
+const ButtonBackground = styled.div`
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.2);
   border: none;
-  font-size: 30px;
-  color: white;
-  cursor: pointer;
 `;
 
-const PrevButton = styled.button`
+const CustomGrNext = styled(GrNext)`
   position: absolute;
+  left: 50%;
   top: 50%;
-  left: 40px;
-  transform: translateY(-50%);
-  font-size: 30px;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
   color: white;
-  cursor: pointer;
+`;
+
+const CustomGrPrevious = styled(GrPrevious)`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: white;
 `;
 
 const MainCarousel = () => {
@@ -67,10 +104,14 @@ const MainCarousel = () => {
         alt={`slide-${currentIndex}`}
       />
       <NextButton onClick={goToNextSlide}>
-        <GrNext />
+        <ButtonBackground>
+          <CustomGrNext />
+        </ButtonBackground>
       </NextButton>
       <PrevButton onClick={goToPrevSlide}>
-        <GrPrevious />
+        <ButtonBackground>
+          <CustomGrPrevious />
+        </ButtonBackground>
       </PrevButton>
     </MainCarouselContainer>
   );

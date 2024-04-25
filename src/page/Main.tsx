@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import MainMenu from "../components/main/MainMenu";
 import MainSlide from "../components/main/MainSlide";
+import MainPopularItems from "../components/main/MainPopularItems";
 
 const MainContainer = styled.div`
   width: 100vw;
@@ -12,6 +13,7 @@ const Main = () => {
     <MainContainer>
       <MainMenu />
       <MainSlide />
+      <MainPopularItems />
     </MainContainer>
   );
 };
