@@ -1,6 +1,7 @@
 import React from "react";
-import LoginForm from "../components/login/LoginForm";
 import styled from "styled-components";
+
+import LoginForm from "../components/login/LoginForm";
 
 function Login() {
   return (
