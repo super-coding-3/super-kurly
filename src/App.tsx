@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Login from "./page/Login";
 import Goods from "./page/Goods";
-import ProductSellList from "./components/goods/ProductsSellList/ProductSellList";
+import ProductSellList from "./components/ProductsSellList/ProductSellList";
 
 const App: React.FC = () => {
   return (

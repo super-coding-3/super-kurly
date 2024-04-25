@@ -1,7 +1,88 @@
+import { Link } from "react-router-dom";
 import React from "react";
 import styled from "styled-components";
-
 const ProductSellList: React.FC = () => {
+  interface FindListData {
+    alt: string;
+    src: string;
+    text: string;
+    href?: string;
+    id: number;
+  }
+
+  interface FindListDataTwo {
+    id: number;
+    text: string;
+  }
+
+  interface FindListContentData {
+    id: number;
+    title: string;
+    price: number;
+    src: string;
+  }
+
+  const FindListData: FindListData[] = [
+    {
+      id: 1,
+      src: "/img/ProductsSellList/Bill.svg",
+      text: "주문 내역",
+      alt: "bill",
+    },
+    {
+      id: 2,
+      src: "/img/ProductsSellList/Ticket.svg",
+      text: "쿠폰",
+      alt: "bill",
+    },
+    {
+      id: 3,
+      src: "/img/ProductsSellList/Heart.svg",
+      text: "찜한 상품",
+      alt: "bill",
+    },
+    {
+      id: 4,
+      src: "/img/ProductsSellList/Bill.svg",
+      text: "내 판매 상품",
+      alt: "bill",
+    },
+    {
+      id: 5,
+      src: "/img/ProductsSellList/Bill.svg",
+      text: "판매 상품 등록",
+      alt: "bill",
+    },
+  ];
+
+  const FindListDatas: FindListDataTwo[] = [
+    { id: 1, text: "결제수단 · 컬리페이" },
+    { id: 2, text: "상품 후기" },
+    { id: 3, text: "선물 내역" },
+    { id: 4, text: "상품 문의" },
+  ];
+
+  const FindListDatasTwo: FindListDataTwo[] = [
+    { id: 1, text: "배송지 관리" },
+    { id: 2, text: "나의 컬리스타일" },
+    { id: 3, text: "개인정보 수정" },
+  ];
+
+  const FindListContentData: FindListContentData[] = [
+    {
+      id: 1,
+      title: "이쁜 강아지",
+      price: 1000000,
+      src: "https://image.utoimage.com/preview/cp872722/2022/12/202212008462_500.jpg",
+    },
+    {
+      id: 2,
+      title: "이쁜 강아지",
+      price: 1000000,
+      src: "https://image.utoimage.com/preview/cp872722/2022/12/202212008462_500.jpg",
+    },
+  ];
+
   return (
     <div>
       <NavDivs></NavDivs>
@@ -23,26 +104,12 @@ const ProductSellList: React.FC = () => {
               <CurlyBannerDiv>
                 <CurlyP>적립 5% </CurlyP>
                 <CurlyPTwo>최초 1회 무료배송</CurlyPTwo>
-                <CurlyBannerA href="https://www.kurly.com/member/membership">
+                <CurlyBannerA to="https://www.kurly.com/member/membership">
                   <CurlyBannerAdiv>
                     <CurlyBannerAspan>N</CurlyBannerAspan>
                     컬리맴버스 월 1,900원으로 10배 쿠폰받기
                   </CurlyBannerAdiv>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    width="16px"
-                    height="16px"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                    />
-                  </svg>
+                  <img src="/img/ProductsSellList/Right.svg" />
                 </CurlyBannerA>
               </CurlyBannerDiv>
               <PointDiv>
@@ -68,145 +135,48 @@ const ProductSellList: React.FC = () => {
             <MenuDivs>
               <GreyFont>자주찾는 메뉴</GreyFont>
               <FindListsDiv>
-                <FindListA>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    width="28px"
-                    height="28px"
+                {FindListData.map((item, index) => (
+                  <FindListA
+                    key={item.id}
+                    to={item.id === 4 ? "/productSellList" : "/"}
                   >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z"
-                    />
-                  </svg>
-                  <FindListFontDiv>주문 내역</FindListFontDiv>
-                </FindListA>
-                <FindListA>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    width="28px"
-                    height="28px"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 0 1 0 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 0 1 0-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375Z"
-                    />
-                  </svg>
-
-                  <FindListFontDiv>쿠폰</FindListFontDiv>
-                </FindListA>
-                <FindListA>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    width="28px"
-                    height="28px"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"
-                    />
-                  </svg>
-
-                  <FindListFontDiv>찜한 상품</FindListFontDiv>
-                </FindListA>
-                <FindListA href="/productSellList">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    width="28px"
-                    height="28px"
-                    textDecoration="none"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z"
-                    />
-                  </svg>
-                  <FindListFontDiv>내 판매 상품</FindListFontDiv>
-                </FindListA>
-                <FindListA>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    width="28px"
-                    height="28px"
-                    color="black"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      color="black"
-                      d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z"
-                    />
-                  </svg>
-                  <FindListFontDiv>판매 상품 등록</FindListFontDiv>
-                </FindListA>
+                    <img src={item.src} alt={item.alt} />
+                    <FindListFontDiv>{item.text}</FindListFontDiv>
+                  </FindListA>
+                ))}
               </FindListsDiv>
             </MenuDivs>
             <BannerDiv>
-              <BannerA href="https://www.kurly.com/shop/event/kurlyEventV2.php?lego=event/2023/0911/join/coupon">
+              <BannerA to="https://www.kurly.com/shop/event/kurlyEventV2.php?lego=event/2023/0911/join/coupon">
                 <BannerImg src="https://product-image.kurly.com/cdn-cgi/image/width=1150,quality=85,format=auto/banner/da-banner/4962e7bf-b76f-467d-aed1-8ef0764048e8.png"></BannerImg>
               </BannerA>
             </BannerDiv>
             <OtherListDiv>
               <ShoppingListDivs>
                 <GreyFont>쇼핑</GreyFont>
-                <FindListA>
-                  <FindListFontDivTwo>결제수단 · 컬리페이</FindListFontDivTwo>
-                </FindListA>
-                <FindListA>
-                  <FindListFontDivTwo>상품 후기</FindListFontDivTwo>
-                </FindListA>
-                <FindListA>
-                  <FindListFontDivTwo>선물 내역</FindListFontDivTwo>
-                </FindListA>
-                <FindListA>
-                  <FindListFontDivTwo>상품 문의</FindListFontDivTwo>
-                </FindListA>
+                {FindListDatas.map((item) => (
+                  <FindListA to="/" key={item.id}>
+                    <FindListFontDivTwo>{item.text}</FindListFontDivTwo>
+                  </FindListA>
+                ))}
               </ShoppingListDivs>
               <BenefitDivs>
                 <GreyFont>혜택</GreyFont>
-                <FindListA>
+                <FindListA to="/">
                   <FindListFontDivTwo>컬리멤버스</FindListFontDivTwo>
                 </FindListA>
               </BenefitDivs>
               <AccountSettingDivs>
                 <GreyFont>내 정보관리</GreyFont>
-                <FindListA>
-                  <FindListFontDivTwo>배송지 관리</FindListFontDivTwo>
-                </FindListA>
-                <FindListA>
-                  <FindListFontDivTwo>나의 컬리스타일</FindListFontDivTwo>
-                </FindListA>
-                <FindListA>
-                  <FindListFontDivTwo>개인정보 수정</FindListFontDivTwo>
-                </FindListA>
+                {FindListDatasTwo.map((item) => (
+                  <FindListA key={item.id} to="/">
+                    <FindListFontDivTwo>{item.text}</FindListFontDivTwo>
+                  </FindListA>
+                ))}
               </AccountSettingDivs>
               <ServiceDivs>
                 <GreyFont>내 정보관리</GreyFont>
-                <FindListA>
+                <FindListA to="/">
                   <FindListFontDivTwo>컬리퍼플박스</FindListFontDivTwo>
                 </FindListA>
               </ServiceDivs>
@@ -222,32 +192,43 @@ const ProductSellList: React.FC = () => {
               </SellListTitleSpan>
             </SellListDivs>
           </SellListTitleDiv>
+
           <SellListCount>
             전체
-            <SellListStrong>1</SellListStrong>개
+            <SellListStrong>{FindListContentData.length}</SellListStrong>개
           </SellListCount>
+
           <SellListContentDiv>
-            <SellListContentDivTwo>
-              <SellListContentA href="https://image.utoimage.com/preview/cp872722/2022/12/202212008462_500.jpg">
-                <SellListContentSpan>
-                    <img src="https://image.utoimage.com/preview/cp872722/2022/12/202212008462_500.jpg" alt="img" width="90px" height="117px"/>
-                </SellListContentSpan>
-              </SellListContentA>
-              <SellListContents>
+              {FindListContentData.map((item) => (
+                <SellListContentDiv key={item.id}>
+                <SellListContentDivTwo key={item.id} >
+                  <SellListContentA to="/">
+                    <SellListContentSpan>
+                      <img
+                        src={item.src}
+                        alt="img"
+                        width="90px"
+                        height="117px"
+                      />
+                    </SellListContentSpan>
+                  </SellListContentA>
+                  <SellListContents>
                     <SellListContentsDiv>
-                        <div>
-                            <SellListTitle>사미헌 갈비탕</SellListTitle>
-                        </div>
-                        <div>
-                            <SellListSpan>10000원</SellListSpan>
-                        </div>
+                      <div>
+                        <SellListTitle>{item.title}</SellListTitle>
+                      </div>
+                      <div>
+                        <SellListSpan>{item.price}</SellListSpan>원
+                      </div>
                     </SellListContentsDiv>
                     <SellListButtonDiv>
-                        <SellListButton>삭제</SellListButton>
-                        <SellListButton>수정</SellListButton>
+                      <SellListButton>삭제</SellListButton>
+                      <SellListButton>수정</SellListButton>
                     </SellListButtonDiv>
-                </SellListContents>
-            </SellListContentDivTwo>
+                  </SellListContents>
+                </SellListContentDivTwo>
+                </SellListContentDiv>
+              ))}
           </SellListContentDiv>
         </SellListDiv>
       </BodyDivs>
@@ -381,7 +362,7 @@ const CurlyPTwo = styled.p`
   line-height: 18px;
 `;
 
-const CurlyBannerA = styled.a`
+const CurlyBannerA = styled(Link)`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -394,6 +375,7 @@ const CurlyBannerA = styled.a`
   word-break: keep-all;
   background-color: rgb(234, 247, 250);
   text-decoration: none;
+  color: black;
 `;
 
 const CurlyBannerAdiv = styled.div`
@@ -550,7 +532,7 @@ const FindListsDiv = styled.div`
   align-items: flex-start;
 `;
 
-const FindListA = styled.a`
+const FindListA = styled(Link)`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -563,9 +545,7 @@ const FindListA = styled.a`
   padding: 16px 0px;
   font-size: 14px;
   gap: 6px;
-  svg {
-    color: black;
-  }
+  color: black;
 `;
 
 const FindListFontDiv = styled.div`
@@ -600,7 +580,7 @@ const BannerDiv = styled.div`
   padding: 15px 25px 20px;
 `;
 
-const BannerA = styled.a`
+const BannerA = styled(Link)`
   display: block;
 `;
 
@@ -657,7 +637,7 @@ const SellListContentDiv = styled.div`
   height: 137px;
   max-width: 610px;
   max-height: 137px;
-  overflow: hidden;
+
   position: relative;
   margin: 0px 0px 0px 20px;
 `;
@@ -665,6 +645,8 @@ const SellListContentDivTwo = styled.div`
   height: 137px;
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
   left: 0px;
   position: absolute;
   top: 0px;
@@ -672,53 +654,54 @@ const SellListContentDivTwo = styled.div`
   padding: 10px 0px;
 `;
 
-const SellListContentA = styled.a`
+const SellListContentA = styled(Link)`
   display: block;
   position: relative;
+  margin-right: 16px;
   width: 90px;
   height: 117px;
   background-color: rgb(245, 245, 245);
 `;
 
 const SellListContentSpan = styled.span`
-    position: absolute;
-    width: 90px;
-    height: 117px;
-`
+  position: absolute;
+  width: 90px;
+  height: 117px;
+`;
 
 const SellListContents = styled.div`
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    width: calc(100% - 90px);
-    padding-left: 16px;
-`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  width: calc(100% - 90px);
+  padding-left: 16px;
+  flex-grow: 1;
+`;
 const SellListContentsDiv = styled.div`
-    font-size: 14px;
-    line-height: 23px;
-    
-`
+  font-size: 14px;
+  line-height: 25px;
+  margin-bottom: 30px;
+`;
 const SellListTitle = styled.a`
-    font-weight: 700;
-`
+  font-weight: 700;
+`;
 
 const SellListSpan = styled.span`
-    color: rgb(51, 51, 51);
-    font-weight: bold;
-    margin-top: 10px;
-`
+  color: rgb(51, 51, 51);
+  font-weight: bold;
+  margin-top: 10px;
+`;
 const SellListButtonDiv = styled.div`
-    display: flex;
-    justify-content: space-between;
-    gap: 6px;
-
-`
-const SellListButton= styled.button`
-    width: 100%;
-    height: 36px;
-    border: 1px solid black;
-    border-radius: 4px;
-`
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+`;
+const SellListButton = styled.button`
+  width: 100%;
+  height: 36px;
+  border: 1px solid black;
+  border-radius: 4px;
+`;
 
 const BottomDivs = styled.div`
   width: 100%;
