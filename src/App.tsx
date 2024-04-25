@@ -1,6 +1,8 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import Login from "./page/Login";
 import Goods from "./page/Goods";
+import ProductSellList from "./components/ProductsSellList/ProductSellList";
 
 const App: React.FC = () => {
   return (
@@ -8,7 +10,9 @@ const App: React.FC = () => {
       {/* TODO Header 삽입 */}
       {/* <Header /> */}
       <Routes>
+        <Route path="/login" element={<Login />} />
         <Route path="/goods" element={<Goods />} />
+        <Route path="/productSellList" element={<ProductSellList/>} />
         {/* 각자 완성한 페이지 path 및 element 삽입 */}
       </Routes>
     </div>
