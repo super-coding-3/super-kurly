@@ -1,16 +1,38 @@
-import "react-app-polyfill/ie11";
 import * as React from "react";
-import * as ReactDOM from "react-dom";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { Formik, Field, Form, FormikHelpers } from "formik";
+import { Link, useNavigate } from "react-router-dom";
+import { Formik, Field, Form, FormikHelpers, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
 interface Values {
   userId: string;
   password: string;
 }
 
+const validationSchema = Yup.object({
+  userId: Yup.string()
+    .required("아이디를 입력해주세요")
+    .matches(/^[a-zA-Z0-9]+$/, "아이디는 영문 또는 숫자만 가능합니다"),
+  password: Yup.string()
+    .required("비밀번호를 입력해주세요")
+    .min(6, "비밀번호는 최소 6자리 이상이어야 합니다"),
+});
+
 const LoginForm = () => {
+  const navigate = useNavigate();
+
+  const onSubmitHandler = (
+    values: Values,
+    { setSubmitting }: FormikHelpers<Values>
+  ) => {
+    setTimeout(() => {
+      console.log("userId", values.userId, "password", values.password);
+      alert("축하합니다! 회원가입이 되었습니다");
+      setSubmitting(false);
+      navigate("/");
+    }, 500);
+  };
+
   return (
     <LoginFormik>
       <Formik
@@ -18,15 +40,8 @@ const LoginForm = () => {
           userId: "",
           password: "",
         }}
-        onSubmit={(
-          values: Values,
-          { setSubmitting }: FormikHelpers<Values>
-        ) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 500);
-        }}
+        validationSchema={validationSchema} // 유효성 검사 스키마 추가
+        onSubmit={onSubmitHandler}
       >
         <Form>
           <FormGroup>
@@ -37,6 +52,7 @@ const LoginForm = () => {
               type="text"
               placeholder="아이디를 입력해주세요"
             />
+            <ErrorMessage name="userId" component="div" className="error-ms" />
           </FormGroup>
 
           <FormGroup>
@@ -46,6 +62,11 @@ const LoginForm = () => {
               name="password"
               type="password"
               placeholder="비밀번호를 입력해주세요"
+            />
+            <ErrorMessage
+              name="password"
+              component="div"
+              className="error-ms"
             />
           </FormGroup>
           <FindLoginInfoWrap>
@@ -86,6 +107,11 @@ const LoginFormik = styled.div`
   }
   label {
     display: none;
+  }
+  .error-ms {
+    font-size: 11px;
+    color: red;
+    margin: 5px 0;
   }
 `;
 
