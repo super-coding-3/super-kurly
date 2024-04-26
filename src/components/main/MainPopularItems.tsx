@@ -84,7 +84,7 @@ const mockData = [
 const PopularItemsContainer = styled.div`
   width: 1050px;
   height: 596px;
-  margin: 50px auto;
+  margin: 100px auto;
   font-weight: 500;
 `;
 
@@ -132,16 +132,22 @@ const PopularItemsContentWrapper = styled.div`
 const PopularItemsImgWrapper = styled.div`
   width: 100%;
   height: 320px;
-  background-color: #f5f5f5;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 10px;
+  border-radius: 5px;
+  overflow: hidden;
 
   img {
+    display: block;
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
+    transition: transform 0.3s ease;
+  }
+  img:hover {
+    transform: scale(1.05);
   }
 `;
 
@@ -313,7 +319,7 @@ const MainPopularItems = () => {
               <CustomGrPrevious />
             </ButtonBackground>
           </PrevButton>
-        )}{" "}
+        )}
         <PopularItemsContentContainer>
           {currentItems.map((item) => (
             <PopularItemsGridContainer>

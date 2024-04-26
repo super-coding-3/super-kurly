@@ -80,8 +80,10 @@ const SubCategoryItem = styled.div`
 
 const DeiliveryInfoBtn = styled.button`
   padding: 4px 20px;
-  border-radius: 8px;
-  border: 1px solid #ff914c;
+  border-radius: 18px;
+  border: 1px solid #eeeeee;
+  font-size: 13px;
+  color: #666666;
 `;
 
 const MainMenuBar = styled.div`
