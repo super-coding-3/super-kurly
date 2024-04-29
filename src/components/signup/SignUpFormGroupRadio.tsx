@@ -29,16 +29,16 @@ const SignupFormGroupRadio: React.FC<SignupFormGroupRadioProps> = ({
   return (
     <SignupFormGroupWrap>
       <SignupFormItem>
-        <label htmlFor={name} className="custom-label">
+        <p className="custom-label">
           {customLabel} {isRequired && <span>*</span>}
-        </label>
+        </p>
         <InputItem style={{ display: "flex" }}>
           <RadioGroup>
             {options.map((option) => {
               return (
                 <RadioItem key={option.value}>
                   <Field
-                   type={type}
+                    type={type}
                     name={name}
                     value={option.value}
                     id={`${name}-${option.value}`}

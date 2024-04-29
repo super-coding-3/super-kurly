@@ -86,7 +86,8 @@ export const SignupFormItem = styled.div`
   display: inline-flex;
   justify-content: flex-start;
   gap: 5px;
-  label.custom-label {
+  label.custom-label,
+  p.custom-label {
     width: 140px;
     flex-grow: 1;
     font-weight: 500;
