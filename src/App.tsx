@@ -13,7 +13,6 @@ import Cart from "./page/Cart";
 const App: React.FC = () => {
   return (
     <div className="App">
-      {/* TODO Header 삽입 */}
       <Header />
       <Routes>
         <Route path="/login" element={<Login />} />
