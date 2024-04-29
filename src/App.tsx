@@ -1,6 +1,8 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+
 import Login from "./page/Login";
+import SignUp from "./page/SignUp";
 import Goods from "./page/Goods";
 import Main from "./page/Main";
 import ProductSellList from "./components/ProductsSellList/ProductSellList";
@@ -14,6 +16,7 @@ const App: React.FC = () => {
       {/* <Header /> */}
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/goods" element={<Goods />} />
         <Route path="/" element={<Main />} />
         <Route path="/productSellList" element={<ProductSellList />} />

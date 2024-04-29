@@ -2,23 +2,19 @@ import * as React from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { Formik, Field, Form, FormikHelpers, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import defaultSchema from "../../schema/index";
+
+interface FormValues {
+  userId: string;
+  password: string;
+}
 
 interface Values {
   userId: string;
   password: string;
 }
 
-const validationSchema = Yup.object({
-  userId: Yup.string()
-    .required("아이디를 입력해주세요")
-    .matches(/^[a-zA-Z0-9]+$/, "아이디는 영문 또는 숫자만 가능합니다"),
-  password: Yup.string()
-    .required("비밀번호를 입력해주세요")
-    .min(6, "비밀번호는 최소 6자리 이상이어야 합니다"),
-});
-
-const LoginForm = () => {
+function LoginForm(): JSX.Element {
   const navigate = useNavigate();
 
   const onSubmitHandler = (
@@ -27,7 +23,7 @@ const LoginForm = () => {
   ) => {
     setTimeout(() => {
       console.log("userId", values.userId, "password", values.password);
-      alert("축하합니다! 회원가입이 되었습니다");
+      alert("로그인 성공!");
       setSubmitting(false);
       navigate("/");
     }, 500);
@@ -40,7 +36,7 @@ const LoginForm = () => {
           userId: "",
           password: "",
         }}
-        validationSchema={validationSchema} // 유효성 검사 스키마 추가
+        validationSchema={defaultSchema} // 유효성 검사 스키마 추가
         onSubmit={onSubmitHandler}
       >
         <Form>
@@ -86,7 +82,7 @@ const LoginForm = () => {
       </Formik>
     </LoginFormik>
   );
-};
+}
 
 const LoginFormik = styled.div`
   width: 340px;
@@ -107,11 +103,6 @@ const LoginFormik = styled.div`
   }
   label {
     display: none;
-  }
-  .error-ms {
-    font-size: 11px;
-    color: red;
-    margin: 5px 0;
   }
 `;
 
