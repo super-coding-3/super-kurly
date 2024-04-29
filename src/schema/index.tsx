@@ -17,7 +17,7 @@ const defaultSchema: Yup.ObjectSchema<FormValues> = Yup.object().shape({
     .matches(/^[a-zA-Z0-9]+$/, "아이디는 영문 또는 숫자만 가능합니다"),
   password: Yup.string()
     .required("비밀번호를 입력해주세요")
-    .min(8, "비밀번호는 최소 8자리 이상이어야 합니다")
+    .min(6, "비밀번호는 최소 6자리 이상이어야 합니다")
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
       "비밀번호는 대소문자, 숫자, 특수문자를 모두 포함해야 합니다"

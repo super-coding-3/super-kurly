@@ -38,7 +38,7 @@ const SignupFormGroupRadio: React.FC<SignupFormGroupRadioProps> = ({
               return (
                 <RadioItem key={option.value}>
                   <Field
-                    type="radio"
+                   type={type}
                     name={name}
                     value={option.value}
                     id={`${name}-${option.value}`}
