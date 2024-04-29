@@ -3,6 +3,11 @@ import { IoMdPaper } from "react-icons/io";
 import { RiCoupon3Line } from "react-icons/ri";
 import { GoHeart } from "react-icons/go";
 import { LiaShoppingBagSolid } from "react-icons/lia";
+import { useNavigate } from "react-router-dom";
+
+interface MypageFrequentMenuProps {
+  onSelectMenu: (menu: string) => void;
+}
 
 const FrequentMenuContainer = styled.div`
   width: 375px;
@@ -33,6 +38,7 @@ const FrequentMenuOptions = styled.div`
   padding: 16px 0px;
   display: flex;
   align-items: center;
+  cursor: pointer;
 `;
 
 const CustomIoMdPaper = styled(IoMdPaper)`
@@ -106,16 +112,28 @@ const ServiceGuideWrapper = styled.div`
   padding: 12px 0px 16px;
 `;
 
-const MypageFrequentMenu = () => {
+const MypageFrequentMenu: React.FC<MypageFrequentMenuProps> = ({
+  onSelectMenu,
+}) => {
+  const navigate = useNavigate();
+
+  const handleOrderHistoryHandler = () => {
+    onSelectMenu("order");
+  };
+
+  const handleCouponHandler = () => {
+    onSelectMenu("coupon");
+  };
+
   return (
     <FrequentMenuContainer>
       <FrequentMenuWrapper>
         <MenuHeading>자주찾는 메뉴</MenuHeading>
-        <FrequentMenuOptions>
+        <FrequentMenuOptions onClick={handleOrderHistoryHandler}>
           <CustomIoMdPaper />
           주문 내역
         </FrequentMenuOptions>
-        <FrequentMenuOptions>
+        <FrequentMenuOptions onClick={handleCouponHandler}>
           <CustomRiCoupon3Line />
           쿠폰
         </FrequentMenuOptions>
