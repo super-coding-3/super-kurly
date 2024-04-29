@@ -18,7 +18,7 @@ interface Values {
   userName: string;
   phone: string;
   address: string;
-  sex: "male" | "female";
+  gender: "male" | "female";
   brith: string;
 }
 
@@ -60,7 +60,7 @@ function SignUpForm(): JSX.Element {
           userName: "",
           phone: "",
           address: "",
-          sex: "male",
+          gender: "male",
           brith: "",
         }}
         validationSchema={defaultSchema} // 유효성 검사 스키마 추가

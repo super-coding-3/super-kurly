@@ -8,7 +8,7 @@ interface FormValues {
   email: string;
   phone: string;
   address: string;
-  sex: "male" | "female";
+  gender: "male" | "female";
 }
 
 const defaultSchema: Yup.ObjectSchema<FormValues> = Yup.object().shape({
@@ -38,7 +38,7 @@ const defaultSchema: Yup.ObjectSchema<FormValues> = Yup.object().shape({
       "유효한 전화번호를 입력해주세요"
     ),
   address: Yup.string().required("주소를 입력해주세요"),
-  sex: Yup.string()
+  gender: Yup.string()
     .oneOf(["male", "female"], "성별을 선택해주세요")
     .required("성별을 선택해주세요"),
 });
