@@ -13,7 +13,8 @@ function Login(): JSX.Element {
 }
 
 export const Container = styled.div`
-  min-width: 1050px;
+  max-width: 1024px;
+  margin: 0 auto;
   margin-top: 90px;
   margin-bottom: 60px;
   background-color: rgb(255, 255, 255);

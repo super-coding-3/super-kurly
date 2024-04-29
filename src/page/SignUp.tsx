@@ -2,11 +2,13 @@ import React from "react";
 import styled from "styled-components";
 
 import { Container } from "./Login";
+import SignUpForm from "../components/signup/SignUpForm";
 
 function SignUp(): JSX.Element {
   return (
     <Container>
       <SignUpTitle>회원가입</SignUpTitle>
+      <SignUpForm />
     </Container>
   );
 }
