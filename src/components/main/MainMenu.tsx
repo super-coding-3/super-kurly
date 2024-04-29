@@ -146,9 +146,11 @@ const MainMenu = () => {
   //     fetchCategories();
   //   }, []);
 
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [categoryHovered, setCategoryHovered] = useState(null);
-  const [subCategoryHovered, setSubCategoryHovered] = useState(null);
+  const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
+  const [categoryHovered, setCategoryHovered] = useState<string | null>(null);
+  const [subCategoryHovered, setSubCategoryHovered] = useState<string | null>(
+    null
+  );
 
   const handleDropdownMouseEnter = () => {
     setDropdownOpen(true);
@@ -176,7 +178,7 @@ const MainMenu = () => {
 
   const navigate = useNavigate();
 
-  const handleNavigate = (path: any) => {
+  const handleNavigate = (path: string) => {
     navigate(path);
   };
   return (

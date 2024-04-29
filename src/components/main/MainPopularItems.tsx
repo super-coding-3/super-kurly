@@ -204,6 +204,7 @@ const ItemReviewWrapper = styled.div`
   color: #999999;
   display: flex;
   align-items: center;
+
   span {
     margin-left: 3px;
   }
@@ -274,7 +275,7 @@ const CustomGrNext = styled(GrNext)`
 `;
 
 const MainPopularItems = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
   //   const [itemsData, setItemsData] = useState([]);
 
   //   useEffect(() => {
