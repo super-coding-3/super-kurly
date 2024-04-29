@@ -3,17 +3,18 @@ import styled from "styled-components";
 
 import LoginForm from "../components/login/LoginForm";
 
-function Login() {
+function Login(): JSX.Element {
   return (
-    <LoginContainer>
+    <Container>
       <LoginTitle>로그인</LoginTitle>
       <LoginForm />
-    </LoginContainer>
+    </Container>
   );
 }
 
-const LoginContainer = styled.div`
-  min-width: 1050px;
+export const Container = styled.div`
+  max-width: 1024px;
+  margin: 0 auto;
   margin-top: 90px;
   margin-bottom: 60px;
   background-color: rgb(255, 255, 255);
