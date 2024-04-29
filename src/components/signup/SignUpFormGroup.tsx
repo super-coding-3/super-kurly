@@ -1,7 +1,10 @@
 // SignupFormGroup.tsx
 import React from "react";
 import styled from "styled-components";
-import { Field, ErrorMessage } from "formik";
+import { Field, ErrorMessage, useFormikContext } from "formik";
+import axios from "axios";
+
+import { MAIN_COLOR } from "./../../constans/color";
 
 interface SignupFormGroupProps {
   customLabel: string;
@@ -10,6 +13,7 @@ interface SignupFormGroupProps {
   placeholder: string;
   isRequired?: boolean;
   isButton: boolean;
+  setFieldValue?: (field: string, value: any, shouldValidate?: boolean) => void;
 }
 
 const SignupFormGroup: React.FC<SignupFormGroupProps> = ({
@@ -19,7 +23,36 @@ const SignupFormGroup: React.FC<SignupFormGroupProps> = ({
   placeholder,
   isRequired,
   isButton,
+  setFieldValue,
 }) => {
+  const { values } = useFormikContext<{ [key: string]: any }>();
+
+  const handleEmailCheck = async () => {
+    try {
+      const response = await axios.get(
+        "http://43.203.104.198:8080/api/member/signUpValid",
+        {
+          params: { email: values[name] },
+        }
+      );
+      const { data } = response;
+      if (data.message === "사용 가능한 email 입니다.") {
+        if (setFieldValue) {
+          setFieldValue(name, values[name], true);
+        }
+        alert("사용 가능한 이메일입니다.");
+      } else if (data.message === "이미 존재하는 email 입니다.") {
+        if (setFieldValue) {
+          setFieldValue(name, "", true);
+        }
+        alert("이미 사용 중인 이메일입니다.");
+      }
+    } catch (error) {
+      console.error("이메일 중복 확인 중 오류 발생:", error);
+      alert("이메일 중복 확인 중 오류가 발생했습니다.");
+    }
+  };
+
   return (
     <SignupFormGroupWrap>
       <SignupFormItem>
@@ -30,7 +63,15 @@ const SignupFormGroup: React.FC<SignupFormGroupProps> = ({
           <Field id={name} name={name} type={type} placeholder={placeholder} />
           <ErrorMessage name={name} component="div" className="error-ms" />
         </InputItem>
-        <BtnArea>{isButton ? <button>중복확인</button> : <></>}</BtnArea>
+        <BtnArea>
+          {isButton ? (
+            <button type="button" onClick={handleEmailCheck}>
+              중복확인
+            </button>
+          ) : (
+            <></>
+          )}
+        </BtnArea>
       </SignupFormItem>
     </SignupFormGroupWrap>
   );
@@ -87,9 +128,9 @@ export const BtnArea = styled.div`
     border-radius: 3px;
     display: block;
     text-align: center;
-    color: rgb(95, 0, 128);
+    color: ${MAIN_COLOR};
     background-color: rgb(255, 255, 255);
-    border: 1px solid rgb(95, 0, 128);
+    border: 1px solid ${MAIN_COLOR};
   }
 `;
 
