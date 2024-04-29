@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
+import Header from "./components/common/Header";
 import Login from "./page/Login";
 import SignUp from "./page/SignUp";
 import Goods from "./page/Goods";
@@ -13,7 +14,7 @@ const App: React.FC = () => {
   return (
     <div className="App">
       {/* TODO Header 삽입 */}
-      {/* <Header /> */}
+      <Header />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
