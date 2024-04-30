@@ -2,8 +2,10 @@ import * as React from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { Formik, Field, Form, FormikHelpers, ErrorMessage } from "formik";
-import defaultSchema from "../../schema/index";
 
+import axios from "axios";
+
+import defaultSchema from "../../schema/index";
 import { MAIN_COLOR } from "./../../constans/color";
 
 interface FormValues {

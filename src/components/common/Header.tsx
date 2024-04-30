@@ -11,13 +11,13 @@ const Header: React.FC<HeaderProps> = (props) => {
     <HeaderWrap>
       <LoginInfoDiv>
         <div>
-          <Link to={"/"} className="active">
+          <Link to={"/signup"} className="active">
             회원가입
           </Link>
         </div>
         <Bar />
         <div>
-          <Link to={"/"}>로그인</Link>
+          <Link to={"/login"}>로그인</Link>
         </div>
       </LoginInfoDiv>
       <HeaderContentDiv>
