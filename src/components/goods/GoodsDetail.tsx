@@ -11,10 +11,12 @@ const GoodsDetail: React.FC = () => {
         />
       </GooodsDetailImg>
       <GoodsDetailInfo>
-        <h3>판매자 정보</h3>
+        <h3>상세 정보</h3>
         <ul>
-          <li id="seller">판매자</li>
-          <li>컬리</li>
+          <li className="title">배송</li>
+          <li className="contents">샛별배송</li>
+          <li className="title">판매자</li>
+          <li className="contents">컬리</li>
         </ul>
       </GoodsDetailInfo>
     </GoodsDetailWrap>
@@ -50,8 +52,11 @@ const GoodsDetailInfo = styled.div`
   li {
     padding: 18px 18px;
   }
-  #seller {
+  .title {
     width: 180px;
     background-color: rgb(247, 247, 247);
+  }
+  .contents {
+    width: 325px;
   }
 `;
