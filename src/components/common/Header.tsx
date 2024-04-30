@@ -53,6 +53,9 @@ const HeaderWrap = styled.div`
   justify-content: space-around;
   flex-direction: column;
   padding: 10px 1rem 0;
+  @media (max-width: 768px) {
+    height: 60px;
+  }
 `;
 
 const LoginInfoDiv = styled.div`
@@ -70,6 +73,8 @@ const LoginInfoDiv = styled.div`
       }
     }
   }
+  @media (max-width: 768px) {
+  }
 `;
 
 const Bar = styled.div`
@@ -84,6 +89,11 @@ const HeaderContentDiv = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  @media (max-width: 768px) {
+    width: 90%;
+
+    justify-content: center;
+  }
 `;
 
 const Logo = styled(Link)`
@@ -115,6 +125,9 @@ const SearchDiv = styled.div`
     top: 0;
     right: 0;
   }
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const BtnWrapDiv = styled.div`
@@ -122,5 +135,8 @@ const BtnWrapDiv = styled.div`
   justify-content: center;
   align-items: center;
   gap: 12px;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 export default Header;
