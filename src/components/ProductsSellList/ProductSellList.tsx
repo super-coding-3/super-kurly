@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import React from "react";
 import styled from "styled-components";
+import MainMenu from "../main/MainMenu";
 const ProductSellList: React.FC = () => {
   interface FindListData {
     alt: string;
@@ -85,7 +86,7 @@ const ProductSellList: React.FC = () => {
 
   return (
     <div>
-      <NavDivs></NavDivs>
+      <MainMenu></MainMenu>
       <BodyDivs>
         <InfoListDiv>
           <InfoListDivs>
