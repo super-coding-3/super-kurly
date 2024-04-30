@@ -4,6 +4,7 @@ import MypageFrequentMenu from "../components/mypage/MypageFrequentMenu";
 import MypageOrder from "../components/mypage/MypageOrder";
 import MypageCoupon from "../components/mypage/MypageCoupon";
 import { useState } from "react";
+import MypageAddress from "../components/mypage/MypageAddress";
 
 const MypageContainer = styled.div`
   width: 100vw;
@@ -29,6 +30,7 @@ const Mypage = () => {
   const menuComponents: Record<string, JSX.Element> = {
     order: <MypageOrder />,
     coupon: <MypageCoupon />,
+    address: <MypageAddress />,
   };
 
   const handleMenuChange = (menu: string) => {

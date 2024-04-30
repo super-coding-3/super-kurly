@@ -3,7 +3,6 @@ import { IoMdPaper } from "react-icons/io";
 import { RiCoupon3Line } from "react-icons/ri";
 import { GoHeart } from "react-icons/go";
 import { LiaShoppingBagSolid } from "react-icons/lia";
-import { useNavigate } from "react-router-dom";
 
 interface MypageFrequentMenuProps {
   onSelectMenu: (menu: string) => void;
@@ -84,22 +83,23 @@ const BannerWrppaer = styled.div`
 
 const OtherMenuWrapper = styled.div`
   width: 100%;
-  height: 681px;
+  height: 318px;
   background-color: white;
   padding: 0px 25px;
+  cursor: pointer;
 `;
 
-const ShoppingWrapper = styled.div`
-  width: 325px;
-  width: 250px;
-  padding: 12px 0px 16px;
-`;
+// const ShoppingWrapper = styled.div`
+//   width: 325px;
+//   width: 250px;
+//   padding: 12px 0px 16px;
+// `;
 
-const BenefitWrapper = styled.div`
-  width: 325px;
-  height: 113px;
-  padding: 12px 0px 16px;
-`;
+// const BenefitWrapper = styled.div`
+//   width: 325px;
+//   height: 113px;
+//   padding: 12px 0px 16px;
+// `;
 
 const ManageInfoWrapper = styled.div`
   width: 325px;
@@ -115,14 +115,16 @@ const ServiceGuideWrapper = styled.div`
 const MypageFrequentMenu: React.FC<MypageFrequentMenuProps> = ({
   onSelectMenu,
 }) => {
-  const navigate = useNavigate();
-
   const handleOrderHistoryHandler = () => {
     onSelectMenu("order");
   };
 
   const handleCouponHandler = () => {
     onSelectMenu("coupon");
+  };
+
+  const handleAddressHandler = () => {
+    onSelectMenu("address");
   };
 
   return (
@@ -150,7 +152,7 @@ const MypageFrequentMenu: React.FC<MypageFrequentMenuProps> = ({
         <img src="/img/mypage/kurly-mypage-banner.jpg" alt="mypage-banner" />
       </BannerWrppaer>
       <OtherMenuWrapper>
-        <ShoppingWrapper>
+        {/* <ShoppingWrapper>
           <MenuHeading>쇼핑</MenuHeading>
           <MenuOptions>결제수단, 컬리페이</MenuOptions>
           <MenuOptions>상품 후기</MenuOptions>
@@ -160,10 +162,10 @@ const MypageFrequentMenu: React.FC<MypageFrequentMenuProps> = ({
         <BenefitWrapper>
           <MenuHeading>혜택</MenuHeading>
           <MenuOptions>컬리멤버스</MenuOptions>
-        </BenefitWrapper>
+        </BenefitWrapper> */}
         <ManageInfoWrapper>
           <MenuHeading>내 정보관리</MenuHeading>
-          <MenuOptions>배송지 관리</MenuOptions>
+          <MenuOptions onClick={handleAddressHandler}>배송지 관리</MenuOptions>
           <MenuOptions>나의 컬리스타일</MenuOptions>
           <MenuOptions>개인정보 수정</MenuOptions>
         </ManageInfoWrapper>
