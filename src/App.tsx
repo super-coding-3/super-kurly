@@ -10,8 +10,8 @@ import ProductSellList from "./components/ProductsSellList/ProductSellList";
 import Order from "./page/Order";
 import Cart from "./page/Cart";
 import Mypage from "./page/Mypage/Mypage";
-import MypageOrder from "./page/Mypage/MypageOrder";
-import MypageCoupon from "./page/Mypage/MypageCoupon";
+import MypageOrder from "./components/mypage/MypageOrder";
+import MypageCoupon from "./components/mypage/MypageCoupon";
 
 const App: React.FC = () => {
   return (
