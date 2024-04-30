@@ -21,6 +21,10 @@ const SignUpTitle = styled.h1`
   text-align: center;
   letter-spacing: -1px;
   color: rgb(51, 51, 51);
+  @media (max-width: 768px) {
+    margin-bottom: 25px;
+    /* font-size: 28px; */
+  }
 `;
 
 export default SignUp;

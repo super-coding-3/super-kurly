@@ -86,6 +86,10 @@ export const SignupFormItem = styled.div`
   display: inline-flex;
   justify-content: flex-start;
   gap: 5px;
+  @media (max-width: 768px) {
+    display: flex;
+    flex-wrap: wrap;
+  }
   label.custom-label,
   p.custom-label {
     width: 140px;
@@ -96,6 +100,11 @@ export const SignupFormItem = styled.div`
     padding-top: 12px;
     span {
       color: rgb(238, 106, 123);
+    }
+    @media (max-width: 768px) {
+      width: 100%;
+      font-size: 12px;
+      padding-top: 0;
     }
   }
 `;
@@ -118,6 +127,12 @@ export const InputItem = styled.div`
       height: 20px;
     }
   }
+  @media (max-width: 768px) {
+    width: calc(100% - 90px);
+    input {
+      font-size: 13px;
+    }
+  }
 `;
 
 export const BtnArea = styled.div`
@@ -132,6 +147,9 @@ export const BtnArea = styled.div`
     color: ${MAIN_COLOR};
     background-color: rgb(255, 255, 255);
     border: 1px solid ${MAIN_COLOR};
+  }
+  @media (max-width: 768px) {
+    width: 80px;
   }
 `;
 

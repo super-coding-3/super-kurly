@@ -19,7 +19,8 @@ interface Values {
   phone: string;
   address: string;
   gender: "male" | "female";
-  brith: string;
+  // brith: string;
+  role: "USER";
 }
 
 function SignUpForm(): JSX.Element {
@@ -29,16 +30,24 @@ function SignUpForm(): JSX.Element {
     values: Values,
     { setSubmitting }: FormikHelpers<Values>
   ) => {
+    if (values.password !== values.passwordConfirm) {
+      alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+      setSubmitting(false);
+      return;
+    }
+
+    const { passwordConfirm, ...requestData } = values;
+
     try {
       const response = await axios.post(
         "http://43.203.104.198:8080/api/member/signup",
-        values
+        requestData
       );
       console.log(response);
-      setSubmitting(true); // Form 제출 시작
-      setSubmitting(false); // Form 제출 완료
+      setSubmitting(true);
+      setSubmitting(false);
       alert("축하합니다! 회원가입이 되었습니다");
-      navigate("/"); // Main 페이지로 이동
+      navigate("/");
     } catch (error) {
       console.log(error);
       alert("회원가입에 실패했습니다. 다시 시도해주세요.");
@@ -61,7 +70,8 @@ function SignUpForm(): JSX.Element {
           phone: "",
           address: "",
           gender: "male",
-          brith: "",
+          // brith: "",
+          role: "USER",
         }}
         validationSchema={defaultSchema} // 유효성 검사 스키마 추가
         onSubmit={onSubmitHandler}
@@ -101,6 +111,14 @@ function SignUpForm(): JSX.Element {
               isRequired={true}
               isButton={false}
             />
+            <SignupFormGroup
+              customLabel="전화번호"
+              name="phone"
+              type="text"
+              placeholder="예:010-1234-5678"
+              isRequired={true}
+              isButton={false}
+            />
 
             <SignupFormGroup
               customLabel="주소"
@@ -121,16 +139,16 @@ function SignUpForm(): JSX.Element {
               isRequired={false}
               isButton={false}
             />
-            <SignupFormGroup
+            {/* <SignupFormGroup
               customLabel="생년월일"
               name="brith"
               type="text"
               placeholder="예:921122"
               isRequired={false}
               isButton={false}
-            />
+            /> */}
             <FormNotice />
-            <AgreementList />
+            {/* <AgreementList /> */}
             <BtnSubmit type="submit">가입하기</BtnSubmit>
           </Form>
         )}
@@ -142,6 +160,10 @@ function SignUpForm(): JSX.Element {
 const SignUpFormWrap = styled.div`
   width: 640px;
   margin: 0 auto;
+  @media (max-width: 768px) {
+    width: 90%;
+    margin: 0 auto;
+  }
 `;
 
 const FormNotice = styled.div`
