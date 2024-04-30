@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import MypageInfo from "../../components/mypage/MypageInfo";
-import MypageFrequentMenu from "../../components/mypage/MypageFrequentMenu";
-import MypageOrder from "../../components/mypage/MypageOrder";
-import MypageCoupon from "../../components/mypage/MypageCoupon";
+import MypageInfo from "../components/mypage/MypageInfo";
+import MypageFrequentMenu from "../components/mypage/MypageFrequentMenu";
+import MypageOrder from "../components/mypage/MypageOrder";
+import MypageCoupon from "../components/mypage/MypageCoupon";
 import { useState } from "react";
 
 const MypageContainer = styled.div`
