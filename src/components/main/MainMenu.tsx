@@ -3,6 +3,7 @@ import { FiMenu } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { MAIN_COLOR } from "../../constans/color";
 
 const MainMenuContainer = styled.div`
   width: 1050px;
@@ -97,7 +98,7 @@ const MainMenuWrapper = styled.div`
   cursor: pointer;
 
   &:hover {
-    color: #ff914c;
+    color: ${MAIN_COLOR};
     text-decoration: underline;
   }
 `;
@@ -146,9 +147,11 @@ const MainMenu = () => {
   //     fetchCategories();
   //   }, []);
 
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [categoryHovered, setCategoryHovered] = useState(null);
-  const [subCategoryHovered, setSubCategoryHovered] = useState(null);
+  const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
+  const [categoryHovered, setCategoryHovered] = useState<string | null>(null);
+  const [subCategoryHovered, setSubCategoryHovered] = useState<string | null>(
+    null
+  );
 
   const handleDropdownMouseEnter = () => {
     setDropdownOpen(true);
@@ -176,7 +179,7 @@ const MainMenu = () => {
 
   const navigate = useNavigate();
 
-  const handleNavigate = (path: any) => {
+  const handleNavigate = (path: string) => {
     navigate(path);
   };
   return (
