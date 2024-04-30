@@ -8,12 +8,11 @@ import Main from "./page/Main";
 import ProductSellList from "./components/ProductsSellList/ProductSellList";
 import Order from "./page/Order";
 import Cart from "./page/Cart";
-import SellerOrder from "./components/seller-order/SellerOrder";
+import SellerOrder from "./components/sellerOrder/SellerOrder";
 const App: React.FC = () => {
   return (
     <div className="App">
       <Header />
-      ``
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
