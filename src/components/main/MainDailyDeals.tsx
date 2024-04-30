@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { IoCartOutline } from "react-icons/io5";
 import { BsChatSquareText } from "react-icons/bs";
 import { useEffect, useState } from "react";
+import { MAIN_COLOR, MAIN_LIGHT_COLOR } from "../../constans/color";
 
 const mockData = [
   {
@@ -122,7 +123,7 @@ const ItemImageWrapper = styled.div`
     left: 3%;
     width: 68px;
     height: 31px;
-    background-color: #fb7c51;
+    background-color: ${MAIN_LIGHT_COLOR};
     color: white;
     font-size: 14px;
     z-index: 1;
@@ -171,7 +172,7 @@ const ItemPriceWrapper = styled.div`
     font-weight: 700;
   }
   span:nth-child(2) {
-    color: #fb7c51;
+    color: ${MAIN_COLOR};
     margin-right: 7px;
   }
 `;
@@ -220,7 +221,7 @@ const MainDailyDeals = () => {
           <ItemGridWrapper>
             <ItemContentsWrapper key={item.id}>
               <ItemImageWrapper>
-                <img src={item.image} alt="" />
+                <img src={item.image} alt="daily-deals-img" />
                 <div>일일특가</div>
               </ItemImageWrapper>
               <AddItemBtn>
