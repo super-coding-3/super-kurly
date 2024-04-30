@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { MAIN_COLOR } from "../../constans/color";
 
 const InfoContainer = styled.div`
   width: 100%;
@@ -19,7 +20,7 @@ const GradeWrapper = styled.div`
   height: 50px;
   border: 1px solid #fb7c51;
   border-radius: 50%;
-  color: #fb7c51;
+  color: ${MAIN_COLOR};
   font-size: 14px;
   font-weight: 500;
   display: flex;

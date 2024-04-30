@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { MAIN_COLOR } from "../../constans/color";
 
 const MypageOrderContainer = styled.div`
   width: 650px;
@@ -43,7 +44,7 @@ const ButtonTab = styled.button<{ isActive: boolean }>`
   margin: 0px 6px 0px 0px;
   padding: 11px 12px 10px;
   border: ${(props) =>
-    props.isActive ? "1px solid #fb7c51" : "1px solid #cccccc"};
+    props.isActive ? `1px solid ${MAIN_COLOR}` : "1px solid #cccccc"};
   border-radius: 3px;
 `;
 

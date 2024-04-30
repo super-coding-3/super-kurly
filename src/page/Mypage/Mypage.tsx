@@ -11,6 +11,7 @@ const MypageContainer = styled.div`
   background-color: #f7f7f7;
   display: flex;
   justify-content: center;
+  padding-top: 50px;
 `;
 
 const SideMenuContainer = styled.div`
@@ -22,13 +23,13 @@ const SelectedMenuContainer = styled.div`
   width: 650px;
 `;
 
-const menuComponents: Record<string, JSX.Element> = {
-  order: <MypageOrder />,
-  coupon: <MypageCoupon />,
-};
-
 const Mypage = () => {
   const [selectedMenu, setSelectedMenu] = useState<string>("order");
+
+  const menuComponents: Record<string, JSX.Element> = {
+    order: <MypageOrder />,
+    coupon: <MypageCoupon />,
+  };
 
   const handleMenuChange = (menu: string) => {
     setSelectedMenu(menu);

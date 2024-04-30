@@ -5,6 +5,7 @@ import { GrPrevious } from "react-icons/gr";
 import { BsChatSquareText } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { MAIN_COLOR, MAIN_LIGHT_COLOR } from "../../constans/color";
 
 const mockData = [
   {
@@ -191,7 +192,7 @@ const ItemPriceWrapper = styled.div`
     font-weight: 700;
   }
   span:nth-child(2) {
-    color: #fb7c51;
+    color: ${MAIN_COLOR};
     margin-right: 7px;
   }
 `;
@@ -238,7 +239,7 @@ const PrevButton = styled.button`
   outline: none;
 
   :hover {
-    color: #fb7c51;
+    color: ${MAIN_COLOR};
   }
 `;
 
@@ -254,7 +255,7 @@ const NextButton = styled.button`
   outline: none;
 
   :hover {
-    color: #fb7c51;
+    color: ${MAIN_COLOR};
   }
 `;
 
