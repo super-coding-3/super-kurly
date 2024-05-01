@@ -3,8 +3,9 @@ import MainMenu from "../main/MainMenu";
 import { Formik, Form, Field, FormikHelpers } from "formik";
 import { ChangeEvent, useState } from "react";
 import { TextField, Button } from "@material-ui/core";
+import { submitData, submitImages } from "./Api";
 
-type Datas = {
+export type Datas = {
   title: string;
   price: number;
   options: string;
@@ -41,10 +42,16 @@ const SellerOrder = () => {
   const [imgSelectOne, SetImgSelectOne] = useState<string | null>(null);
   const [imgSelectTwo, SetImgSelectTwo] = useState<string | null>(null);
 
-  const handleSubmit = (values: Datas, actions: FormikHelpers<Datas>) => {
+  const handleSubmit = async (values: Datas, actions: FormikHelpers<Datas>) => {
     actions.setSubmitting(true);
-    console.log(values);
-    actions.setSubmitting(false);
+    try{
+      await submitData(values);
+      actions.setSubmitting(false);
+    }catch(error){
+      console.error('Error 발생',error);
+      actions.setSubmitting(false);
+    }
+    
   };
 
   const handleImgChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -74,13 +81,13 @@ const SellerOrder = () => {
   const imgFields = [
     {
       id: 1,
-      text: "제품 상세 이미지 업로드",
+      text: "제품 상세 이미지 업로드(클릭)",
       img: imgSelectOne,
       onchange: handleImgChangeOne,
     },
     {
       id: 2,
-      text: "상제 정보 이미지 업로드",
+      text: "상제 정보 이미지 업로드(클릭)",
       img: imgSelectTwo,
       onchange: handleImgChangeTwo,
     },
@@ -106,7 +113,7 @@ const SellerOrder = () => {
                       style={{ display: "none" }}
                     />
                     <label htmlFor="upload-button" onBlur={handleBlur}>
-                      이미지 업로드
+                      이미지 업로드(클릭)
                     </label>
                   </div>
                 </SellerOrderImgDiv>
@@ -155,16 +162,18 @@ const SellerOrder = () => {
                         accept="image/*"
                         onChange={fields.onchange || ""}
                         id={`upload-button-${fields.id}`}
-                        style={{ display: "none" }}
+                        style={{ display: "none", border:"1px solid black"}}
                       />
+                      <br/>
                       <label
                         htmlFor={`upload-button-${fields.id}`}
                         onBlur={handleBlur}
+                        style={{marginBottom:"12px"}}
                       >
                         {fields.text}
                       </label>
-                      <br />
-                      {<input type="text" value={fields.img || ""}></input>}
+                      <br/>
+                      {<input type="text" value={fields.img || ""} style={{marginTop:"4px"}}></input>}
                     </div>
                   ))}
                 </SellerOrderOtherImgDiv>
@@ -183,8 +192,8 @@ const SellerOrder = () => {
                 </DetailDiv>
               </SellerOrderSectorTwo>
               <SellerSectorButtons>
-                <Button onBlur={handleBlur}>등록</Button>
-                <Button>삭제</Button>
+                <Buttons type="submit" onBlur={handleBlur} >등록</Buttons>
+                <Buttons onBlur={handleBlur}>삭제</Buttons>
               </SellerSectorButtons>
             </Form>
           )}
@@ -247,6 +256,7 @@ const SellerOrderImgDiv = styled.div`
 const SellerOrderImg = styled.img`
   width: 300px;
   height: 300px;
+  border-radius: 2px;
 `;
 
 const SellerOrderSectorTwo = styled.div`
@@ -260,7 +270,7 @@ const SellerOrderSectorTwo = styled.div`
 const SellerOrderOtherImgDiv = styled.div`
   width: 300px;
   height: 80px;
-  margin-top: 10px;
+  
 `;
 
 const DetailDiv = styled.div`
@@ -276,7 +286,8 @@ const SellerSectorButtons = styled.div`
   width: 100%;
   height: 80px;
   margin: auto;
-  margin-top: 40px;
+  margin-top: 70px;
+  margin-left: 800px;
   display: flex;
   flex-direction: row;
   gap: 10px;
