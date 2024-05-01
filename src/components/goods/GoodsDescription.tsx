@@ -27,6 +27,8 @@ const GoodsDescription: React.FC = () => {
 export default GoodsDescription;
 
 const GoodsDescriptionWrap = styled.div`
+  margin-top: 40px;
+  width: 1010px;
   h3 {
     margin: 75px 0px 0px;
     padding-bottom: 35px;

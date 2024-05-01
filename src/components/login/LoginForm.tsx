@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { Formik, Field, Form, FormikHelpers, ErrorMessage } from "formik";
 import defaultSchema from "../../schema/index";
 
+import { MAIN_COLOR } from "./../../constans/color";
+
 interface FormValues {
   userId: string;
   password: string;
@@ -119,7 +121,7 @@ const BtnLoginSubmit = styled.button`
   height: 54px;
   border-radius: 3px;
   color: rgb(255, 255, 255);
-  background-color: rgb(95, 0, 128);
+  background-color: ${MAIN_COLOR};
   border: 0px none;
   font-size: 16px;
   font-weight: 500;
@@ -134,9 +136,9 @@ const BtnGoSignup = styled(Link)`
   width: 100%;
   height: 54px;
   border-radius: 3px;
-  color: rgb(95, 0, 128);
+  color: ${MAIN_COLOR};
   background-color: rgb(255, 255, 255);
-  border: 1px solid rgb(95, 0, 128);
+  border: 1px solid ${MAIN_COLOR};
   font-size: 16px;
   font-weight: 500;
 `;

@@ -1,20 +1,20 @@
 import * as Yup from "yup";
 
 interface FormValues {
-  userId: string;
+  email: string;
   password: string;
   passwordConfirm: string;
   userName: string;
-  email: string;
   phone: string;
   address: string;
   gender: "male" | "female";
+  brith: string;
 }
 
 const defaultSchema: Yup.ObjectSchema<FormValues> = Yup.object().shape({
-  userId: Yup.string()
-    .required("아이디를 입력해주세요")
-    .matches(/^[a-zA-Z0-9]+$/, "아이디는 영문 또는 숫자만 가능합니다"),
+  email: Yup.string()
+    .email("유효한 이메일 주소를 입력해주세요")
+    .required("이메일을 입력해주세요"),
   password: Yup.string()
     .required("비밀번호를 입력해주세요")
     .min(6, "비밀번호는 최소 6자리 이상이어야 합니다")
@@ -28,9 +28,7 @@ const defaultSchema: Yup.ObjectSchema<FormValues> = Yup.object().shape({
   userName: Yup.string()
     .required("이름을 입력해주세요")
     .matches(/^[가-힣]+$/, "이름은 한글로만 입력해주세요"),
-  email: Yup.string()
-    .email("유효한 이메일 주소를 입력해주세요")
-    .required("이메일을 입력해주세요"),
+
   phone: Yup.string()
     .required("전화번호를 입력해주세요")
     .matches(
@@ -41,6 +39,7 @@ const defaultSchema: Yup.ObjectSchema<FormValues> = Yup.object().shape({
   gender: Yup.string()
     .oneOf(["male", "female"], "성별을 선택해주세요")
     .required("성별을 선택해주세요"),
+  brith: Yup.string().required("yy/mm/dd"),
 });
 
 export default defaultSchema;
