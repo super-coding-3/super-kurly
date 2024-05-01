@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DaumPostcodeEmbed from "react-daum-postcode";
 import styled from "styled-components";
 import { MAIN_COLOR } from "../../constans/color";
@@ -69,20 +69,20 @@ const AddressWrapper = styled.div`
 const AddressDetailWrapper = styled.div`
   width: 526px;
   height: 97px;
+`;
 
-  p:nth-child(2) {
-    width: 526px;
-    height: 18.4px;
-    color: #333333;
-    margin-bottom: 5px;
-    font-size: 16px;
-  }
+const Address = styled.p`
+  width: 526px;
+  height: 18.4px;
+  color: #333333;
+  margin-bottom: 5px;
+  font-size: 16px;
+`;
 
-  p:nth-child(4) {
-    height: 20px;
-    font-size: 14px;
-    color: ${MAIN_COLOR};
-  }
+const ExpressDelivery = styled.p`
+  height: 20px;
+  font-size: 14px;
+  color: ${MAIN_COLOR};
 `;
 
 const CheckboxWrapper = styled.div`
@@ -112,33 +112,37 @@ const NameAndPhoneWrapper = styled.div`
   font-size: 14px;
   color: #666666;
   margin-bottom: 10px;
+`;
 
-  div:first-child {
-    padding-right: 10px;
-    border-right: 1px solid #cccccc;
-  }
+const Name = styled.div`
+  padding-right: 10px;
+  border-right: 1px solid #cccccc;
+`;
 
-  div:nth-child(2) {
-    padding-left: 10px;
-  }
+const Phone = styled.div`
+  padding-left: 10px;
 `;
 
 const MypageAddress = () => {
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
   const [address, setAddress] = useState<string>("");
   const [isBoxChecked, setIsBoxChecked] = useState<boolean>(true);
-  const [isAddressSelected, setIsAddresSelected] = useState<boolean>(false);
+  const [isAddressSelected, setIsAddressSelected] = useState<boolean>(false);
+  const [addressList, setAddressList] = useState<string[]>([]);
+  const [isDefaultAddress, setIsDefaultAddress] = useState<boolean>(true);
+  const [isChecked, setIsChecked] = useState<boolean>(true);
+  const [selectedAddressIndex, setSelectedAddressIndex] = useState<number>(-1);
 
   const handleOpenPopup = () => {
     setIsPopupOpen(true);
   };
 
-  const handleCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const isChecked = e.target.checked;
-    setIsBoxChecked(true);
-    if (!isChecked) {
-      setIsBoxChecked(false);
-    }
+  const handleCheckbox = (index: number) => {
+    setSelectedAddressIndex(index);
+    const newList = [...addressList];
+    const selectedAddress = newList.splice(index, 1)[0];
+    newList.unshift(selectedAddress);
+    setAddressList(newList);
   };
 
   const handleClickOutside = (event: any) => {
@@ -151,8 +155,16 @@ const MypageAddress = () => {
     const fullAddress = data.address;
     setAddress(fullAddress);
     setIsPopupOpen(false);
-    setIsAddresSelected(true);
+    setIsAddressSelected(true);
+    setAddressList([fullAddress, ...addressList]);
+    setSelectedAddressIndex(0);
   };
+
+  useEffect(() => {
+    if (addressList.length > 0) {
+      setSelectedAddressIndex(0);
+    }
+  }, [addressList]);
 
   return (
     <MypageAddressContainer>
@@ -170,25 +182,26 @@ const MypageAddress = () => {
           </ModalWrapper>
         )}
       </Header>
-      {isAddressSelected && (
-        <AddressWrapper>
-          <CheckboxWrapper>
-            <CustomCheckbox
-              isChecked={isBoxChecked}
-              onChange={handleCheckbox}
-            />
-          </CheckboxWrapper>
-          <AddressDetailWrapper>
-            <DefaultAddress>기본 배송지</DefaultAddress>
-            <p>{address}</p>
-            <NameAndPhoneWrapper>
-              <div>홍길동</div>
-              <div>010-0101-0101</div>
-            </NameAndPhoneWrapper>
-            <p>샛별배송</p>
-          </AddressDetailWrapper>
-        </AddressWrapper>
-      )}
+      {isAddressSelected &&
+        addressList.map((address, index) => (
+          <AddressWrapper key={index}>
+            <CheckboxWrapper>
+              <CustomCheckbox
+                isChecked={selectedAddressIndex === index}
+                onChange={() => handleCheckbox(index)}
+              />
+            </CheckboxWrapper>
+            <AddressDetailWrapper>
+              {index === 0 && <DefaultAddress>기본 배송지</DefaultAddress>}
+              <Address>{address}</Address>
+              <NameAndPhoneWrapper>
+                <Name>홍길동</Name>
+                <Phone>010-0101-0101</Phone>
+              </NameAndPhoneWrapper>
+              <ExpressDelivery>샛별배송</ExpressDelivery>
+            </AddressDetailWrapper>
+          </AddressWrapper>
+        ))}
     </MypageAddressContainer>
   );
 };

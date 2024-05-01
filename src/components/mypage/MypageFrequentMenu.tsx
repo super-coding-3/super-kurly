@@ -140,12 +140,11 @@ const MypageFrequentMenu: React.FC<MypageFrequentMenuProps> = ({
           쿠폰
         </FrequentMenuOptions>
         <FrequentMenuOptions>
-          <CustomGoHeart />
-          찜한 상품
+          <CustomGoHeart />내 판매 상품
         </FrequentMenuOptions>
         <FrequentMenuOptions>
           <CustomLiaShoppingBagSolid />
-          자주 구매
+          판매 상품 등록
         </FrequentMenuOptions>
       </FrequentMenuWrapper>
       <BannerWrppaer>
