@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import MainMenu from "../main/MainMenu";
+import axios from "axios";
+import { error } from "console";
 const ProductSellList: React.FC = () => {
   interface FindListData {
     alt: string;
@@ -83,6 +85,32 @@ const ProductSellList: React.FC = () => {
       src: "https://image.utoimage.com/preview/cp872722/2022/12/202212008462_500.jpg",
     },
   ];
+
+  const [SellListContentData, setSellListContentData] = useState<any[]>([]);
+
+  const handleDelete = (id: number) => {
+    axios
+      .delete(`/${id}`)
+      .then((response) => {
+        setSellListContentData((prevData) =>
+          prevData.filter((item) => item.id !== id)
+        );
+      })
+      .catch((error) => {
+        console.error("삭제도중 error!" + error);
+      });
+  };
+
+  useEffect(() => {
+    axios
+      .get("/")
+      .then((response) => {
+        setSellListContentData(response.data);
+      })
+      .catch((error) => {
+        console.log("error 발생", error);
+      });
+  }, []);
 
   return (
     <div>
@@ -198,9 +226,39 @@ const ProductSellList: React.FC = () => {
             전체
             <SellListStrong>{FindListContentData.length}</SellListStrong>개
           </SellListCount>
-
           <SellListContentDiv>
-              {FindListContentData.map((item) => (
+            {FindListContentData.map((item) => (
+              <SellListContentDiv key={item.id}>
+                <SellListContentDivTwo key={item.id}>
+                  <SellListContentA to="/">
+                    <SellListContentSpan>
+                      <img
+                        src={item.src}
+                        alt="img"
+                        width="90px"
+                        height="117px"
+                      />
+                    </SellListContentSpan>
+                  </SellListContentA>
+                  <SellListContents>
+                    <SellListContentsDiv>
+                      <div>
+                        <SellListTitle>{item.title}</SellListTitle>
+                      </div>
+                      <div>
+                        <SellListSpan>{item.price}</SellListSpan>원
+                      </div>
+                    </SellListContentsDiv>
+                    <SellListButtonDiv>
+                      <SellListButton onClick={()=> handleDelete(item.id)}>삭제</SellListButton>
+                      <SellListButton>수정</SellListButton>
+                    </SellListButtonDiv>
+                  </SellListContents>
+                </SellListContentDivTwo>
+              </SellListContentDiv>
+            ))}
+            {/*api 호출 성공시 사용*/}{" "}
+            {/* {SellListContentData.map((item:any) => (
                 <SellListContentDiv key={item.id}>
                 <SellListContentDivTwo key={item.id} >
                   <SellListContentA to="/">
@@ -223,13 +281,13 @@ const ProductSellList: React.FC = () => {
                       </div>
                     </SellListContentsDiv>
                     <SellListButtonDiv>
-                      <SellListButton>삭제</SellListButton>
+                      <SellListButton  onClick={()=> handleDelete(item.id)} >삭제</SellListButton>
                       <SellListButton>수정</SellListButton>
                     </SellListButtonDiv>
                   </SellListContents>
                 </SellListContentDivTwo>
                 </SellListContentDiv>
-              ))}
+              ))} */}
           </SellListContentDiv>
         </SellListDiv>
       </BodyDivs>
