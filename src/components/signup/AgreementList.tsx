@@ -99,6 +99,9 @@ const AgreementListWrap = styled.div`
   display: flex;
   gap: 10px;
   align-items: flex-start;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const AgreementCustomLabel = styled.div`
@@ -108,6 +111,11 @@ const AgreementCustomLabel = styled.div`
   font-size: 14px;
   span {
     color: rgb(238, 106, 123);
+  }
+  @media (max-width: 768px) {
+    width: 100%;
+    font-size: 12px;
+    padding-top: 0;
   }
 `;
 

@@ -1,25 +1,47 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import { MAIN_COLOR, MAIN_LIGHT_COLOR } from "./../../constans/color";
 
-interface HeaderProps {}
+interface HeaderProps {
+  isLogin: boolean;
+  setIsLogin: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-const Header: React.FC<HeaderProps> = (props) => {
+const Header: React.FC<HeaderProps> = ({ isLogin, setIsLogin }) => {
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsLogin(false);
+  };
+
   return (
     <HeaderWrap>
-      <LoginInfoDiv>
-        <div>
-          <Link to={"/signup"} className="active">
-            회원가입
-          </Link>
-        </div>
-        <Bar />
-        <div>
-          <Link to={"/login"}>로그인</Link>
-        </div>
-      </LoginInfoDiv>
+      {isLogin ? (
+        <LoginInfoDiv>
+          <UserNameDiv>
+            <p>
+              <span>User</span>님, 환영합니다
+            </p>
+          </UserNameDiv>
+          <Bar />
+          <div>
+            <button onClick={handleLogout}>로그아웃</button>
+          </div>
+        </LoginInfoDiv>
+      ) : (
+        <LoginInfoDiv>
+          <div>
+            <Link to={"/signup"} className="active">
+              회원가입
+            </Link>
+          </div>
+          <Bar />
+          <div>
+            <Link to={"/login"}>로그인</Link>
+          </div>
+        </LoginInfoDiv>
+      )}
       <HeaderContentDiv>
         <Logo to={"/"}>
           <img src="img/common/logo-kurly.png" alt="슈퍼컬리 로고" />
@@ -64,7 +86,8 @@ const LoginInfoDiv = styled.div`
   align-items: center;
   gap: 10px;
   div {
-    a {
+    a,
+    button {
       color: #333;
       font-size: 12px;
       display: block;
@@ -77,6 +100,17 @@ const LoginInfoDiv = styled.div`
   }
 `;
 
+const UserNameDiv = styled.div`
+  p {
+    color: #888;
+    font-size: 12px;
+    span {
+      color: ${MAIN_COLOR};
+      font-weight: 500;
+    }
+  }
+`;
+
 const Bar = styled.div`
   width: 1px;
   height: 13px;
@@ -84,12 +118,13 @@ const Bar = styled.div`
 `;
 
 const HeaderContentDiv = styled.div`
-  width: 1050px;
+  max-width: 1050px;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: flex-end;
-  @media (max-width: 768px) {
+  gap: 4rem;
+  @media (max-width: 1024px) {
     width: 90%;
 
     justify-content: center;
@@ -107,6 +142,9 @@ const Logo = styled(Link)`
     font-weight: 500;
     color: ${MAIN_COLOR};
     font-size: 18px;
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
 `;
 
