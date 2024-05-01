@@ -1,0 +1,19 @@
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="100" cy="100" r="90" fill="#fb7c51" stroke="black"  stroke-width="0"/>
+  <line x1="100" y1="100" x2="100" y2="40" stroke="white" stroke-width="15">
+
+    <animateTransform
+      attributeName="transform"
+      attributeType="XML"
+      type="rotate"
+      from="0 100 100"
+      to="360 100 100"
+      dur="2s"
+      repeatCount="indefinite"
+    />
+
+  </line>
+
+    <line x1="100" y1="100" x2="100" y2="40" stroke="white" stroke-width="15">
+  </line>
+</svg>
