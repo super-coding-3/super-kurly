@@ -19,8 +19,13 @@ interface Values {
   phone: string;
   address: string;
   gender: "male" | "female";
-  // brith: string;
+  brith: string;
   role: "USER";
+  all: boolean;
+  agreement1: boolean;
+  agreement2: boolean;
+  agreement3: boolean;
+  agreement4: boolean;
 }
 
 function SignUpForm(): JSX.Element {
@@ -36,7 +41,18 @@ function SignUpForm(): JSX.Element {
       return;
     }
 
-    const { passwordConfirm, ...requestData } = values;
+    // 비밀번호 일치, 약관동의,  서버 보내지않기
+    const {
+      passwordConfirm,
+      all,
+      agreement1,
+      agreement2,
+      agreement3,
+      agreement4,
+      ...requestData
+    } = values;
+
+    console.log(values);
 
     try {
       const response = await axios.post(
@@ -47,7 +63,7 @@ function SignUpForm(): JSX.Element {
       setSubmitting(true);
       setSubmitting(false);
       alert("축하합니다! 회원가입이 되었습니다");
-      navigate("/");
+      // navigate("/");
     } catch (error) {
       console.log(error);
       alert("회원가입에 실패했습니다. 다시 시도해주세요.");
@@ -70,8 +86,13 @@ function SignUpForm(): JSX.Element {
           phone: "",
           address: "",
           gender: "male",
-          // brith: "",
+          brith: "",
           role: "USER",
+          all: false,
+          agreement1: false,
+          agreement2: false,
+          agreement3: false,
+          agreement4: false,
         }}
         validationSchema={defaultSchema} // 유효성 검사 스키마 추가
         onSubmit={onSubmitHandler}
@@ -139,16 +160,16 @@ function SignUpForm(): JSX.Element {
               isRequired={false}
               isButton={false}
             />
-            {/* <SignupFormGroup
+            <SignupFormGroup
               customLabel="생년월일"
               name="brith"
               type="text"
               placeholder="예:921122"
-              isRequired={false}
+              isRequired={true}
               isButton={false}
-            /> */}
+            />
             <FormNotice />
-            {/* <AgreementList /> */}
+            <AgreementList />
             <BtnSubmit type="submit">가입하기</BtnSubmit>
           </Form>
         )}
