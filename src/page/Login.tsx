@@ -3,14 +3,18 @@ import styled from "styled-components";
 
 import LoginForm from "../components/login/LoginForm";
 
-function Login(): JSX.Element {
+interface LoginPageProps {
+  onLoginSuccess: () => void;
+}
+
+const Login: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
   return (
     <Container>
       <LoginTitle>로그인</LoginTitle>
-      <LoginForm />
+      <LoginForm onLoginSuccess={onLoginSuccess} />
     </Container>
   );
-}
+};
 
 export const Container = styled.div`
   max-width: 1024px;
