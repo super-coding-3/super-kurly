@@ -1,83 +1,110 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { MAIN_COLOR } from "../../constans/color";
 import OrderedProductAmount from "../common/OrderedProductAmount";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { object } from "yup";
+
+interface GoodsDataType {
+  img: string;
+  title: string;
+  price: number;
+  delivery: string;
+  seller: string;
+  origin: string;
+  option: string;
+  stock: number;
+}
 
 const GoodsMain: React.FC = () => {
   const [goodsAmount, setgoodsAmount] = useState(1);
+  const [goodsData, setgoodsData] = useState<GoodsDataType>({
+    img: "",
+    title: "",
+    price: 0,
+    delivery: "",
+    seller: "",
+    origin: "",
+    option: "",
+    stock: 0,
+  });
 
-  axios({
-    method: "get",
-    url: `http://43.203.104.198:8080/`,
-  })
-    .then((result) => {
-      console.log("get요청성공");
-      console.log(result);
-    })
-    .catch((error) => {
-      console.log("요청실패");
-      console.log(error);
-    });
-  const GoodsData = [
-    {
-      img: "https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=720,height=936,quality=85/product/image/a67c9c98-39a1-4018-ab75-5dc1a8402c3a.jpg",
-      title: "[비비고x고메] 간편식 골라담기 9종 (택1)",
-      price: 7150,
-      delivery: "샛별배송",
-      seller: "컬리",
-      origin: "상품설명/상세정보 참조",
-      option: "간편식1",
-      stock: 10,
-    },
-  ];
+  // 물품 데이터 가져오기
+  useEffect(() => {
+    async function getGoodsData(id: number) {
+      try {
+        const res = await axios.get(
+          `http://43.203.104.198:8080/api/item/page/1`
+        );
+        setgoodsData(res.data);
+      } catch (error) {
+        console.error(error);
+        alert("물품 데이터 조회 실패");
+      }
+    }
+  }, []);
 
-  const goodsPriceComma = GoodsData[0].price
+  // const GoodsData = [
+  //   {
+  //     img: "https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=720,height=936,quality=85/product/image/a67c9c98-39a1-4018-ab75-5dc1a8402c3a.jpg",
+  //     title: "[비비고x고메] 간편식 골라담기 9종 (택1)",
+  //     price: 7150,
+  //     delivery: "샛별배송",
+  //     seller: "컬리",
+  //     origin: "상품설명/상세정보 참조",
+  //     option: "간편식1",
+  //     stock: 10,
+  //   },
+  // ];
+
+  // const goodsPriceComma = GoodsData[0].price
+  const goodsPriceComma = goodsData.price
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-  const goodsPriceTotalComma = (GoodsData[0].price * goodsAmount)
+  // const goodsPriceTotalComma = (GoodsData[0].price * goodsAmount)
+  const goodsPriceTotalComma = (goodsData.price * goodsAmount)
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
   return (
     <GoodsMainWrap>
       <GoodsMainImg>
-        <img src={GoodsData[0].img} />
+        <img src={goodsData.img} />
       </GoodsMainImg>
       <GoodsMainSection>
         <GoodsDelivery>샛별배송</GoodsDelivery>
         <GoodsTitle>
-          <div>{GoodsData[0].title}</div>
+          <div>{goodsData.title}</div>
         </GoodsTitle>
         <GoodsDiscountPrice>
           <div>
             <em>{goodsPriceComma}</em>원
           </div>
         </GoodsDiscountPrice>
-        <GoodsOrigin>원산지: {GoodsData[0].origin}</GoodsOrigin>
+        <GoodsOrigin>원산지: {goodsData.origin}</GoodsOrigin>
         <GoodsInfo>
           <GoodsInfoLi>
             <GoodsInfoDt>배송</GoodsInfoDt>
             <GoodsInfoDd>
-              <div>{GoodsData[0].delivery}</div>
+              <div>{goodsData.delivery}</div>
             </GoodsInfoDd>
           </GoodsInfoLi>
           <GoodsInfoLi>
             <GoodsInfoDt>판매자</GoodsInfoDt>
-            <GoodsInfoDd>{GoodsData[0].seller}</GoodsInfoDd>
+            <GoodsInfoDd>{goodsData.seller}</GoodsInfoDd>
           </GoodsInfoLi>
         </GoodsInfo>
         <GoodsPurchase>
           <GoodsPurchaseChoice>
             <GoodsPurchaseChoiceDt>상품 선택</GoodsPurchaseChoiceDt>
             <GoodsPurchaseChoiceDd>
-              <div>{GoodsData[0].option}</div>
+              <div>{goodsData.option}</div>
               <OrderedProductAmount
                 amount={goodsAmount}
                 setAmount={setgoodsAmount}
-                stock={GoodsData[0].stock}
+                stock={goodsData.stock}
               />
             </GoodsPurchaseChoiceDd>
           </GoodsPurchaseChoice>
