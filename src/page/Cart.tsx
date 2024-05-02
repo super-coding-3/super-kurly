@@ -109,7 +109,17 @@ const CartTitle = styled.div`
 const CartWrap = styled.div`
   width: 1050px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   gap: 20px;
   margin-top: 50px;
+  @media screen and (max-width: 1050px) {
+    max-width: 742px;
+  }
+  @media screen and (max-width: 800px) {
+    flex-direction: column;
+    align-items: center;
+  }
+  @media screen and (max-width: 540px) {
+    max-width: 340px;
+  }
 `;
