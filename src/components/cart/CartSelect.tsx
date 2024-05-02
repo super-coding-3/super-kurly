@@ -1,15 +1,47 @@
 import React from "react";
 import styled from "styled-components";
+import { MAIN_COLOR } from "../../constans/color";
+import {
+  IoIosCheckmarkCircleOutline,
+  IoIosCheckmarkCircle,
+} from "react-icons/io";
 
-const CartSelect: React.FC = () => {
+interface CartDataProps {
+  productData: Array<object>;
+  allCheckBtnHandler: Function;
+}
+
+const CartSelect: React.FC<CartDataProps> = (props) => {
+  const allCheckBtnHandler = () => {
+    props.allCheckBtnHandler();
+  };
+
   return (
     <CartSelectWrap>
-      <CartSelectCheckBtn>
-        <img src="/img/cart/CheckBtn.svg" />
+      <CartSelectCheckBtn onClick={allCheckBtnHandler}>
+        {props.productData.reduce(
+          (acc: any, curr: any) => acc + curr.select,
+          0
+        ) != props.productData.length ? (
+          <IoIosCheckmarkCircleOutline
+            color="rgb(221, 221, 221)"
+            size="2.5em"
+          />
+        ) : (
+          <IoIosCheckmarkCircle color={MAIN_COLOR} size="2.5em" />
+        )}
       </CartSelectCheckBtn>
-      <CartSelectAllBtn>전체선택 (1/2)</CartSelectAllBtn>
-      <CartSelectContour>|</CartSelectContour>
-      <CartSelectPartBtn>선택삭제</CartSelectPartBtn>
+      <CartSelectAllBtn>
+        전체선택 (
+        {props.productData.reduce((count: any, product: any) => {
+          if (product.select) {
+            return count + 1;
+          } else {
+            return count;
+          }
+        }, 0)}
+        /{props.productData.length})
+      </CartSelectAllBtn>
     </CartSelectWrap>
   );
 };
@@ -25,8 +57,3 @@ const CartSelectWrap = styled.div`
 `;
 const CartSelectCheckBtn = styled.button``;
 const CartSelectAllBtn = styled.button``;
-const CartSelectContour = styled.div`
-  color: rgb(221, 221, 221);
-  padding: 0 5px;
-`;
-const CartSelectPartBtn = styled.button``;
