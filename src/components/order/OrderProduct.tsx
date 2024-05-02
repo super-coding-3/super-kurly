@@ -1,59 +1,42 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import OrderedProductTitle from "../common/OrderedProductTitle";
 
-const OrderProduct: React.FC = () => {
+interface OrderDataProps {
+  // orderData: Array<object>;
+  orderData: any;
+}
+
+const OrderProduct: React.FC<OrderDataProps> = (props) => {
   const [productDropBar, setproductDropBar] = useState(false);
-
-  const OrderData = [
-    {
-      img: "https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240424/4cbbd57f-6344-4efa-8c61-c8fce2cb0be8.jpg",
-      product: "[비비고] 왕교자 455G*2",
-      title: "[비비고x고메] 간편식 골라담기 9종 (택1)",
-      amount: "1개",
-      price: "7,150원",
-    },
-    {
-      img: "https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240425/f82b8e12-7669-47ea-860c-b202e75ad696.jpg",
-      product: "[쿳킷x비비고] 왕교자 사골 떡만두국",
-      title: "[비비고x고메] 간편식 골라담기 9종 (택1)",
-      amount: "2개",
-      price: "6,980원",
-    },
-  ];
 
   return (
     <OrderProductWrap>
-      <OrderProductTitle>
-        <div>주문 상품</div>
-        <button
-          onClick={() => {
-            setproductDropBar(!productDropBar);
-          }}
-        >
-          {productDropBar ? (
-            <img src="/img/goods/UpArrow.svg" />
-          ) : (
-            <img src="/img/goods/DownArrow.svg" />
-          )}
-        </button>
-      </OrderProductTitle>
+      <OrderedProductTitle
+        productDropBar={productDropBar}
+        setproductDropBar={setproductDropBar}
+      />
       {productDropBar ? (
-        OrderData.map((data) => {
+        props.orderData.map((data: any) => {
           return (
             <OrderProductContentsDrop>
               <img src={data.img} />
               <div id="product">
-                <div id="productName">{data.product}</div>
-                <div id="productTitle">{data.title}</div>
+                <div id="productName">{data.title}</div>
+                <div id="productTitle">{data.option}</div>
               </div>
-              <div>{data.amount}</div>
-              <div id="price">{data.price}</div>
+              {/* TODO 장바구니의 수량으로 변경 필요 */}
+              <div>{data.stock}</div>
+              <div id="price">
+                {data.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+              </div>
             </OrderProductContentsDrop>
           );
         })
       ) : (
         <OrderProductContents>
-          {OrderData[0].product} 외 {OrderData.length - 1}개 상품을 주문합니다.
+          {props.orderData[0].title} 외 {props.orderData.length - 1}개 상품을
+          주문합니다.
         </OrderProductContents>
       )}
     </OrderProductWrap>
@@ -64,24 +47,15 @@ export default OrderProduct;
 
 const OrderProductWrap = styled.div`
   margin-top: 48px;
-  font-size: 14px;
   width: 1050px;
-`;
-
-const OrderProductTitle = styled.div`
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid rgb(51, 51, 51);
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 60px;
-  button {
-    display: flex;
-    align-items: center;
+  @media screen and (max-width: 1050px) {
+    max-width: 742px;
   }
-  img {
-    width: 25px;
-    height: 25px;
+  @media screen and (max-width: 742px) {
+    max-width: 540px;
+  }
+  @media screen and (max-width: 540px) {
+    max-width: 340px;
   }
 `;
 
@@ -109,9 +83,17 @@ const OrderProductContentsDrop = styled.div`
     flex-direction: column;
     width: 700px;
     gap: 10px;
+    @media screen and (max-width: 1050px) {
+      max-width: 500px;
+    }
+    @media screen and (max-width: 742px) {
+      max-width: 300px;
+    }
+    @media screen and (max-width: 540px) {
+      max-width: 100px;
+    }
   }
   #productName {
-    width: 700px;
     font-size: 16px;
   }
   #productTitle {
