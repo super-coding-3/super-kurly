@@ -1,10 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import GoodsMain from "../components/goods/GoodsMain";
-import GoodsInquiry from "../components/goods/GoodsInquiry";
-import GoodsReview from "../components/goods/GoodsReview";
 import GoodsDetail from "../components/goods/GoodsDetail";
 import GoodsDescription from "../components/goods/GoodsDescription";
+import axios from "axios";
 
 const Goods: React.FC = () => {
   return (
@@ -14,8 +13,6 @@ const Goods: React.FC = () => {
         <GoodsNavList>
           <GoodsNavBtn href="#GoodsDescription">상품설명</GoodsNavBtn>
           <GoodsNavBtn href="#GoodsDetail">상세정보</GoodsNavBtn>
-          {/* <GoodsNavBtn href="#GoodsReview">후기 (52,049)</GoodsNavBtn>
-          <GoodsNavBtn href="#GoodsInquiry">문의</GoodsNavBtn> */}
         </GoodsNavList>
       </GoodsNav>
       <div id="GoodsDescription">
@@ -24,12 +21,6 @@ const Goods: React.FC = () => {
       <div id="GoodsDetail">
         <GoodsDetail />
       </div>
-      {/* <div id="GoodsReview">
-        <GoodsReview />
-      </div>
-      <div id="GoodsInquiry">
-        <GoodsInquiry />
-      </div> */}
     </GoodsWrap>
   );
 };
@@ -41,6 +32,7 @@ const GoodsWrap = styled.div`
   justify-self: center;
   flex-direction: column;
   align-items: center;
+  margin-top: 50px;
 `;
 
 const GoodsNav = styled.div`
@@ -54,6 +46,15 @@ const GoodsNavList = styled.div`
   justify-content: center;
   align-items: center;
   width: 1010px;
+  @media screen and (max-width: 1050px) {
+    width: 742px;
+  }
+  @media screen and (max-width: 742px) {
+    width: 560px;
+  }
+  @media screen and (max-width: 560px) {
+    width: 360px;
+  }
 `;
 
 const GoodsNavBtn = styled.a`

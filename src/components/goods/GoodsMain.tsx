@@ -1,25 +1,49 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { MAIN_COLOR } from "../../constans/color";
 import OrderedProductAmount from "../common/OrderedProductAmount";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+// interface GoodsDataType {
+//   img: string;
+//   title: string;
+//   price: number;
+//   delivery: string;
+//   seller: string;
+//   origin: string;
+//   option: string;
+//   stock: number;
+// }
+
 const GoodsMain: React.FC = () => {
   const [goodsAmount, setgoodsAmount] = useState(1);
+  // const [goodsData, setgoodsData] = useState<GoodsDataType>({
+  //   img: "",
+  //   title: "",
+  //   price: 0,
+  //   delivery: "",
+  //   seller: "",
+  //   origin: "",
+  //   option: "",
+  //   stock: 0,
+  // });
 
-  axios({
-    method: "get",
-    url: `http://43.203.104.198:8080/`,
-  })
-    .then((result) => {
-      console.log("get요청성공");
-      console.log(result);
-    })
-    .catch((error) => {
-      console.log("요청실패");
-      console.log(error);
-    });
+  // 물품 데이터 가져오기
+  // useEffect(() => {
+  //   async function getGoodsData(id: number) {
+  //     try {
+  //       const res = await axios.get(
+  //         `http://43.203.104.198:8080/api/item/page/1`
+  //       );
+  //       setgoodsData(res.data);
+  //     } catch (error) {
+  //       console.error(error);
+  //       alert("물품 데이터 조회 실패");
+  //     }
+  //   }
+  // }, []);
+
   const GoodsData = [
     {
       img: "https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=720,height=936,quality=85/product/image/a67c9c98-39a1-4018-ab75-5dc1a8402c3a.jpg",
@@ -34,9 +58,11 @@ const GoodsMain: React.FC = () => {
   ];
 
   const goodsPriceComma = GoodsData[0].price
+    // const goodsPriceComma = goodsData.price
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
+  // const goodsPriceTotalComma = (GoodsData[0].price * goodsAmount)
   const goodsPriceTotalComma = (GoodsData[0].price * goodsAmount)
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -98,13 +124,25 @@ const GoodsMainWrap = styled.div`
   justify-content: center;
   align-items: start;
   gap: 0px 50px;
-  padding-top: 30px;
+  @media screen and (max-width: 800px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 const GoodsMainImg = styled.div`
-  width: 400px;
+  width: 40%;
   img {
     width: 100%;
     border-radius: 2%;
+  }
+  @media screen and (max-width: 1050px) {
+    width: 30%;
+  }
+  @media screen and (max-width: 800px) {
+    width: 100%;
+  }
+  @media screen and (max-width: 560px) {
+    width: 90%;
   }
 `;
 
@@ -113,8 +151,18 @@ const GoodsMainSection = styled.div`
   flex-direction: column;
   justify-content: start;
   align-items: left;
-  width: 560px;
+  width: 50%;
   font-size: 14px;
+  @media screen and (max-width: 1050px) {
+    width: 40%;
+  }
+  @media screen and (max-width: 800px) {
+    margin-top: 20px;
+    width: 100%;
+  }
+  @media screen and (max-width: 560px) {
+    width: 90%;
+  }
 `;
 
 const GoodsDelivery = styled.div`
