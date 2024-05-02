@@ -5,22 +5,34 @@ import OrderUser from "../components/order/OrderUser";
 import OrderDelivery from "../components/order/OrderDelivery";
 import OrderPrivacy from "../components/order/OrderPrivacy";
 import OrderPrice from "../components/order/OrderPrice";
+import { MAIN_COLOR } from "../constans/color";
+import { ProductData } from "../components/common/data/ProductData";
 
 const Order: React.FC = () => {
+  const orderPaymentBtnHandler = () => {
+    alert("주문이 완료되었습니다.");
+  };
+
   return (
     <OrderFragment>
       <OrderTitle>주문서</OrderTitle>
-      <OrderProduct />
+      <OrderProduct orderData={ProductData()} />
       <OrderWrap>
         <OrderDetail>
           <OrderUser />
           <OrderDelivery />
           <OrderPrivacy />
           <OrderPaymentBtn>
-            <button>14,130원 결제하기</button>
+            <button onClick={orderPaymentBtnHandler}>
+              {ProductData()
+                .reduce((acc: number, curr: any) => acc + curr.price, 0)
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+              원 결제하기
+            </button>
           </OrderPaymentBtn>
         </OrderDetail>
-        <OrderPrice />
+        <OrderPrice orderData={ProductData()} />
       </OrderWrap>
     </OrderFragment>
   );
@@ -34,24 +46,34 @@ const OrderFragment = styled.div`
   align-items: center;
   flex-direction: column;
   margin: 50px 0;
+  font-size: 14px;
 `;
 
 const OrderTitle = styled.div`
   text-align: center;
-  width: 1050px;
   font-weight: 500;
   font-size: 28px;
 `;
 
 const OrderWrap = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   position: relative;
+  width: 1050px;
   gap: 20px;
+  @media screen and (max-width: 1050px) {
+    max-width: 742px;
+  }
+  @media screen and (max-width: 742px) {
+    max-width: 540px;
+  }
+  @media screen and (max-width: 540px) {
+    max-width: 340px;
+  }
 `;
 
 const OrderDetail = styled.div`
-  width: 742px;
+  width: 100%;
 `;
 
 const OrderPaymentBtn = styled.div`
@@ -64,7 +86,7 @@ const OrderPaymentBtn = styled.div`
     height: 56px;
     border-radius: 3px;
     color: rgb(255, 255, 255);
-    background-color: rgb(95, 0, 128);
+    background-color: ${MAIN_COLOR};
     font-weight: 500;
   }
 `;
