@@ -44,41 +44,47 @@ const CartList: React.FC<CartDataProps> = (props) => {
           props.productData.map((data: any, index: number) => {
             return (
               <CartProductList>
-                <CartListCheckBtn
-                  onClick={() => {
-                    productSelectHandler(index);
-                  }}
-                >
-                  {data.select === false ? (
-                    <IoIosCheckmarkCircleOutline
-                      color="rgb(221, 221, 221)"
-                      size="2em"
-                    />
-                  ) : (
-                    <IoIosCheckmarkCircle color={MAIN_COLOR} size="2em" />
-                  )}
-                </CartListCheckBtn>
-                <CartListImg src={data.img} />
-                <div id="product">
-                  <div id="productName">{data.option}</div>
-                  <div id="productTitle">{data.title}</div>
-                </div>
-                <OrderedProductAmount
-                  amount={productAmount}
-                  setAmount={setproductAmount}
-                  stock={data.stock}
-                />
-                <div id="price">
-                  {data.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                  원
-                </div>
-                <CartListDelBtn
-                  onClick={() => {
-                    productDeleteHandler(data.id);
-                  }}
-                >
-                  <IoMdClose color="rgb(221, 221, 221)" size="2em" />
-                </CartListDelBtn>
+                <CartListFirst>
+                  <CartListCheckBtn
+                    onClick={() => {
+                      productSelectHandler(index);
+                    }}
+                  >
+                    {data.select === false ? (
+                      <IoIosCheckmarkCircleOutline
+                        color="rgb(221, 221, 221)"
+                        size="2em"
+                      />
+                    ) : (
+                      <IoIosCheckmarkCircle color={MAIN_COLOR} size="2em" />
+                    )}
+                  </CartListCheckBtn>
+                  <CartListImg src={data.img} />
+                  <CartProductDiv>
+                    <div id="productName">{data.option}</div>
+                    <div id="productTitle">{data.title}</div>
+                  </CartProductDiv>
+                </CartListFirst>
+                <CartListSecond>
+                  <OrderedProductAmount
+                    amount={productAmount}
+                    setAmount={setproductAmount}
+                    stock={data.stock}
+                  />
+                  <div id="price">
+                    {data.price
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    원
+                  </div>
+                  <CartListDelBtn
+                    onClick={() => {
+                      productDeleteHandler(data.id);
+                    }}
+                  >
+                    <IoMdClose color="rgb(221, 221, 221)" size="2em" />
+                  </CartListDelBtn>
+                </CartListSecond>
               </CartProductList>
             );
           })}
@@ -95,6 +101,12 @@ export default CartList;
 
 const CartListWrap = styled.div`
   width: 742px;
+  @media screen and (max-width: 1050px) {
+    max-width: 560px;
+  }
+  @media screen and (max-width: 540px) {
+    max-width: 340px;
+  }
 `;
 
 const CartProduct = styled.div`
@@ -108,21 +120,29 @@ const CartProductList = styled.div`
   padding: 25px 0px;
   width: 100%;
   border-bottom: 1px solid rgb(244, 244, 244);
-  #product {
-    display: flex;
+  #price {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 30px;
+  }
+  @media screen and (max-width: 540px) {
     flex-direction: column;
-    gap: 10px;
-    width: 345px;
+  }
+`;
+
+const CartProductDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 345px;
+  @media screen and (max-width: 1050px) {
+    max-width: 200px;
   }
   #productName {
     font-size: 16px;
   }
   #productTitle {
     color: rgb(153, 153, 153);
-  }
-  #price {
-    font-weight: 700;
-    font-size: 16px;
   }
 `;
 
@@ -134,3 +154,19 @@ const CartListImg = styled.img`
 `;
 
 const CartListDelBtn = styled.button``;
+
+const CartListFirst = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+`;
+
+const CartListSecond = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  @media screen and (max-width: 540px) {
+    gap: 60px;
+    margin-top: 25px;
+  }
+`;

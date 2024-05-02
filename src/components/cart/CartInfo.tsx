@@ -70,13 +70,23 @@ export default CartInfo;
 
 const CartInfoFragment = styled.div`
   position: relative;
-  width: 284px;
+  /* width: 284px; */
+  @media screen and (max-width: 20000px) {
+    max-width: 284px;
+  }
+  @media screen and (max-width: 1050px) {
+    max-width: 184px;
+  }
+  @media screen and (max-width: 800px) {
+    max-width: 560px;
+  }
 `;
 
 const CartInfoWrap = styled.div`
   position: sticky;
   top: 0;
   padding-top: 60px;
+  width: 100%;
 `;
 
 const CartInfoDelivery = styled.div`
