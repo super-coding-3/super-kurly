@@ -32,6 +32,7 @@ const GoodsWrap = styled.div`
   justify-self: center;
   flex-direction: column;
   align-items: center;
+  margin-top: 50px;
 `;
 
 const GoodsNav = styled.div`
@@ -45,6 +46,15 @@ const GoodsNavList = styled.div`
   justify-content: center;
   align-items: center;
   width: 1010px;
+  @media screen and (max-width: 1050px) {
+    width: 742px;
+  }
+  @media screen and (max-width: 742px) {
+    width: 560px;
+  }
+  @media screen and (max-width: 560px) {
+    width: 360px;
+  }
 `;
 
 const GoodsNavBtn = styled.a`

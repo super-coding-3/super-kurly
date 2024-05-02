@@ -29,6 +29,15 @@ export default GoodsDescription;
 const GoodsDescriptionWrap = styled.div`
   margin-top: 40px;
   width: 1010px;
+  @media screen and (max-width: 1050px) {
+    width: 742px;
+  }
+  @media screen and (max-width: 742px) {
+    width: 560px;
+  }
+  @media screen and (max-width: 560px) {
+    width: 340px;
+  }
   h3 {
     margin: 75px 0px 0px;
     padding-bottom: 35px;
@@ -48,5 +57,8 @@ const GoodsDescriptionWrap = styled.div`
     font-size: 18px;
     line-height: 32px;
     color: rgb(55, 55, 55);
+  }
+  img {
+    width: 100%;
   }
 `;

@@ -4,107 +4,106 @@ import { MAIN_COLOR } from "../../constans/color";
 import OrderedProductAmount from "../common/OrderedProductAmount";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { object } from "yup";
 
-interface GoodsDataType {
-  img: string;
-  title: string;
-  price: number;
-  delivery: string;
-  seller: string;
-  origin: string;
-  option: string;
-  stock: number;
-}
+// interface GoodsDataType {
+//   img: string;
+//   title: string;
+//   price: number;
+//   delivery: string;
+//   seller: string;
+//   origin: string;
+//   option: string;
+//   stock: number;
+// }
 
 const GoodsMain: React.FC = () => {
   const [goodsAmount, setgoodsAmount] = useState(1);
-  const [goodsData, setgoodsData] = useState<GoodsDataType>({
-    img: "",
-    title: "",
-    price: 0,
-    delivery: "",
-    seller: "",
-    origin: "",
-    option: "",
-    stock: 0,
-  });
+  // const [goodsData, setgoodsData] = useState<GoodsDataType>({
+  //   img: "",
+  //   title: "",
+  //   price: 0,
+  //   delivery: "",
+  //   seller: "",
+  //   origin: "",
+  //   option: "",
+  //   stock: 0,
+  // });
 
   // 물품 데이터 가져오기
-  useEffect(() => {
-    async function getGoodsData(id: number) {
-      try {
-        const res = await axios.get(
-          `http://43.203.104.198:8080/api/item/page/1`
-        );
-        setgoodsData(res.data);
-      } catch (error) {
-        console.error(error);
-        alert("물품 데이터 조회 실패");
-      }
-    }
-  }, []);
+  // useEffect(() => {
+  //   async function getGoodsData(id: number) {
+  //     try {
+  //       const res = await axios.get(
+  //         `http://43.203.104.198:8080/api/item/page/1`
+  //       );
+  //       setgoodsData(res.data);
+  //     } catch (error) {
+  //       console.error(error);
+  //       alert("물품 데이터 조회 실패");
+  //     }
+  //   }
+  // }, []);
 
-  // const GoodsData = [
-  //   {
-  //     img: "https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=720,height=936,quality=85/product/image/a67c9c98-39a1-4018-ab75-5dc1a8402c3a.jpg",
-  //     title: "[비비고x고메] 간편식 골라담기 9종 (택1)",
-  //     price: 7150,
-  //     delivery: "샛별배송",
-  //     seller: "컬리",
-  //     origin: "상품설명/상세정보 참조",
-  //     option: "간편식1",
-  //     stock: 10,
-  //   },
-  // ];
+  const GoodsData = [
+    {
+      img: "https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=720,height=936,quality=85/product/image/a67c9c98-39a1-4018-ab75-5dc1a8402c3a.jpg",
+      title: "[비비고x고메] 간편식 골라담기 9종 (택1)",
+      price: 7150,
+      delivery: "샛별배송",
+      seller: "컬리",
+      origin: "상품설명/상세정보 참조",
+      option: "간편식1",
+      stock: 10,
+    },
+  ];
 
-  // const goodsPriceComma = GoodsData[0].price
-  const goodsPriceComma = goodsData.price
+  const goodsPriceComma = GoodsData[0].price
+    // const goodsPriceComma = goodsData.price
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
   // const goodsPriceTotalComma = (GoodsData[0].price * goodsAmount)
-  const goodsPriceTotalComma = (goodsData.price * goodsAmount)
+  const goodsPriceTotalComma = (GoodsData[0].price * goodsAmount)
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
   return (
     <GoodsMainWrap>
       <GoodsMainImg>
-        <img src={goodsData.img} />
+        <img src={GoodsData[0].img} />
       </GoodsMainImg>
       <GoodsMainSection>
         <GoodsDelivery>샛별배송</GoodsDelivery>
         <GoodsTitle>
-          <div>{goodsData.title}</div>
+          <div>{GoodsData[0].title}</div>
         </GoodsTitle>
         <GoodsDiscountPrice>
           <div>
             <em>{goodsPriceComma}</em>원
           </div>
         </GoodsDiscountPrice>
-        <GoodsOrigin>원산지: {goodsData.origin}</GoodsOrigin>
+        <GoodsOrigin>원산지: {GoodsData[0].origin}</GoodsOrigin>
         <GoodsInfo>
           <GoodsInfoLi>
             <GoodsInfoDt>배송</GoodsInfoDt>
             <GoodsInfoDd>
-              <div>{goodsData.delivery}</div>
+              <div>{GoodsData[0].delivery}</div>
             </GoodsInfoDd>
           </GoodsInfoLi>
           <GoodsInfoLi>
             <GoodsInfoDt>판매자</GoodsInfoDt>
-            <GoodsInfoDd>{goodsData.seller}</GoodsInfoDd>
+            <GoodsInfoDd>{GoodsData[0].seller}</GoodsInfoDd>
           </GoodsInfoLi>
         </GoodsInfo>
         <GoodsPurchase>
           <GoodsPurchaseChoice>
             <GoodsPurchaseChoiceDt>상품 선택</GoodsPurchaseChoiceDt>
             <GoodsPurchaseChoiceDd>
-              <div>{goodsData.option}</div>
+              <div>{GoodsData[0].option}</div>
               <OrderedProductAmount
                 amount={goodsAmount}
                 setAmount={setgoodsAmount}
-                stock={goodsData.stock}
+                stock={GoodsData[0].stock}
               />
             </GoodsPurchaseChoiceDd>
           </GoodsPurchaseChoice>
@@ -125,13 +124,25 @@ const GoodsMainWrap = styled.div`
   justify-content: center;
   align-items: start;
   gap: 0px 50px;
-  padding-top: 30px;
+  @media screen and (max-width: 800px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 const GoodsMainImg = styled.div`
-  width: 400px;
+  width: 40%;
   img {
     width: 100%;
     border-radius: 2%;
+  }
+  @media screen and (max-width: 1050px) {
+    width: 30%;
+  }
+  @media screen and (max-width: 800px) {
+    width: 100%;
+  }
+  @media screen and (max-width: 560px) {
+    width: 90%;
   }
 `;
 
@@ -140,8 +151,18 @@ const GoodsMainSection = styled.div`
   flex-direction: column;
   justify-content: start;
   align-items: left;
-  width: 560px;
+  width: 50%;
   font-size: 14px;
+  @media screen and (max-width: 1050px) {
+    width: 40%;
+  }
+  @media screen and (max-width: 800px) {
+    margin-top: 20px;
+    width: 100%;
+  }
+  @media screen and (max-width: 560px) {
+    width: 90%;
+  }
 `;
 
 const GoodsDelivery = styled.div`
