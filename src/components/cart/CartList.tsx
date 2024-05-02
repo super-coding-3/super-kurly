@@ -1,56 +1,92 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import CartSelect from "./CartSelect";
-import { ProductData } from "../common/data/ProductData";
 import OrderedProductTitle from "../common/OrderedProductTitle";
-import { FaPlus } from "react-icons/fa6";
-import { FaMinus } from "react-icons/fa6";
+import {
+  IoIosCheckmarkCircleOutline,
+  IoIosCheckmarkCircle,
+  IoMdClose,
+} from "react-icons/io";
+import OrderedProductAmount from "../common/OrderedProductAmount";
+import { MAIN_COLOR } from "../../constans/color";
 
-const CartList: React.FC = () => {
-  const [productDropBar, setproductDropBar] = useState(true);
+interface CartDataProps {
+  productData: Array<object>;
+  productSelectHandler: Function;
+  productDeleteHandler: Function;
+  allCheckBtnHandler: Function;
+}
+
+const CartList: React.FC<CartDataProps> = (props) => {
+  const [productDropBar, setproductDropBar] = useState(false);
+  const [productAmount, setproductAmount] = useState(1);
+
+  const productSelectHandler = (index: number) => {
+    props.productSelectHandler(index);
+  };
+
+  const productDeleteHandler = (id: string) => {
+    props.productDeleteHandler(id);
+  };
 
   return (
     <CartListWrap>
-      <CartSelect />
+      <CartSelect
+        productData={props.productData}
+        allCheckBtnHandler={props.allCheckBtnHandler}
+      />
       <CartProduct>
         <OrderedProductTitle
           productDropBar={productDropBar}
           setproductDropBar={setproductDropBar}
         />
         {productDropBar &&
-          ProductData().map((data) => {
+          props.productData.map((data: any, index: number) => {
             return (
               <CartProductList>
-                <CartListCheckBtn>
-                  <img src="/img/cart/CheckBtn.svg" />
+                <CartListCheckBtn
+                  onClick={() => {
+                    productSelectHandler(index);
+                  }}
+                >
+                  {data.select === false ? (
+                    <IoIosCheckmarkCircleOutline
+                      color="rgb(221, 221, 221)"
+                      size="2em"
+                    />
+                  ) : (
+                    <IoIosCheckmarkCircle color={MAIN_COLOR} size="2em" />
+                  )}
                 </CartListCheckBtn>
                 <CartListImg src={data.img} />
                 <div id="product">
-                  <div id="productName">{data.product}</div>
+                  <div id="productName">{data.option}</div>
                   <div id="productTitle">{data.title}</div>
                 </div>
-                <CartListAmount>
-                  <CartListAmountMinus>
-                    {data.amount === 1 ? (
-                      <FaMinus color="#dddddd" />
-                    ) : (
-                      <FaMinus />
-                    )}
-                  </CartListAmountMinus>
-                  <div>{data.amount}</div>
-                  <CartListAmountPlus>
-                    <FaPlus />
-                  </CartListAmountPlus>
-                </CartListAmount>
-                <div id="price">{data.price}</div>
-                <CartListDelBtn>
-                  <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCAzMCAzMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik0yMSA5Ljc2MiAyMC4yMzggOSAxNSAxNC4yMzggOS43NjIgOSA5IDkuNzYyIDE0LjIzOCAxNSA5IDIwLjIzOGwuNzYyLjc2MkwxNSAxNS43NjIgMjAuMjM4IDIxbC43NjItLjc2MkwxNS43NjIgMTV6IiBmaWxsPSIjQ0NDIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz4KPC9zdmc+Cg==" />
+                <OrderedProductAmount
+                  amount={productAmount}
+                  setAmount={setproductAmount}
+                  stock={data.stock}
+                />
+                <div id="price">
+                  {data.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                  원
+                </div>
+                <CartListDelBtn
+                  onClick={() => {
+                    productDeleteHandler(data.id);
+                  }}
+                >
+                  <IoMdClose color="rgb(221, 221, 221)" size="2em" />
                 </CartListDelBtn>
               </CartProductList>
             );
           })}
       </CartProduct>
-      <CartSelect />
+      <CartSelect
+        productData={props.productData}
+        allCheckBtnHandler={props.allCheckBtnHandler}
+      />
     </CartListWrap>
   );
 };
@@ -95,25 +131,6 @@ const CartListCheckBtn = styled.button``;
 const CartListImg = styled.img`
   width: 60px;
   height: 78px;
-`;
-
-const CartListAmount = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  border: 1px solid rgb(221, 223, 225);
-  width: 88px;
-  border-radius: 3px;
-  height: 30px;
-`;
-const CartListAmountMinus = styled.button`
-  width: 13px;
-  height: 13px;
-`;
-
-const CartListAmountPlus = styled.button`
-  width: 13px;
-  height: 13px;
 `;
 
 const CartListDelBtn = styled.button``;
