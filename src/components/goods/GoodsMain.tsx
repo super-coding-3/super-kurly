@@ -1,48 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { MAIN_COLOR } from "../../constans/color";
 import OrderedProductAmount from "../common/OrderedProductAmount";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-// interface GoodsDataType {
-//   img: string;
-//   title: string;
-//   price: number;
-//   delivery: string;
-//   seller: string;
-//   origin: string;
-//   option: string;
-//   stock: number;
-// }
-
 const GoodsMain: React.FC = () => {
   const [goodsAmount, setgoodsAmount] = useState(1);
-  // const [goodsData, setgoodsData] = useState<GoodsDataType>({
-  //   img: "",
-  //   title: "",
-  //   price: 0,
-  //   delivery: "",
-  //   seller: "",
-  //   origin: "",
-  //   option: "",
-  //   stock: 0,
-  // });
-
-  // 물품 데이터 가져오기
-  // useEffect(() => {
-  //   async function getGoodsData(id: number) {
-  //     try {
-  //       const res = await axios.get(
-  //         `http://43.203.104.198:8080/api/item/page/1`
-  //       );
-  //       setgoodsData(res.data);
-  //     } catch (error) {
-  //       console.error(error);
-  //       alert("물품 데이터 조회 실패");
-  //     }
-  //   }
-  // }, []);
 
   const GoodsData = [
     {
@@ -58,11 +22,9 @@ const GoodsMain: React.FC = () => {
   ];
 
   const goodsPriceComma = GoodsData[0].price
-    // const goodsPriceComma = goodsData.price
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-  // const goodsPriceTotalComma = (GoodsData[0].price * goodsAmount)
   const goodsPriceTotalComma = (GoodsData[0].price * goodsAmount)
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -179,16 +141,6 @@ const GoodsTitle = styled.div`
   font-weight: 500;
   font-size: 24px;
   color: rgb(51, 51, 51);
-
-  /* button {
-    background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGNpcmNsZSBzdHJva2U9IiNEREQiIGN4PSIyMCIgY3k9IjIwIiByPSIxOS41Ii8+CiAgICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTAuNSAxMSkiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIxLjgiPgogICAgICAgICAgICA8Y2lyY2xlIGN4PSIzIiBjeT0iOSIgcj0iMi4xIi8+CiAgICAgICAgICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDUuMTM3KSI+CiAgICAgICAgICAgICAgICA8Y2lyY2xlIGN4PSI4Ljg2MyIgY3k9IjMiIHI9IjIuMSIvPgogICAgICAgICAgICAgICAgPHBhdGggc3Ryb2tlLWxpbmVjYXA9InNxdWFyZSIgZD0iTTAgOC4xMzYgNi4zNjMgNC41Ii8+CiAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgPGcgdHJhbnNmb3JtPSJtYXRyaXgoMSAwIDAgLTEgNS4xMzcgMTgpIj4KICAgICAgICAgICAgICAgIDxjaXJjbGUgY3g9IjguODYzIiBjeT0iMyIgcj0iMi4xIi8+CiAgICAgICAgICAgICAgICA8cGF0aCBzdHJva2UtbGluZWNhcD0ic3F1YXJlIiBkPSJNMCA4LjEzNiA2LjM2MyA0LjUiLz4KICAgICAgICAgICAgPC9nPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+Cg==)
-      50% 50% no-repeat;
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    width: 40px;
-    height: 40px;
-  } */
 `;
 
 const GoodsDiscountPrice = styled.div`

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { MAIN_COLOR } from "../../constans/color";
 
 interface CartDataProps {
-  productData: Array<object>;
+  cartData: Array<object>;
 }
 
 const CartInfo: React.FC<CartDataProps> = (props) => {
@@ -23,7 +23,7 @@ const CartInfo: React.FC<CartDataProps> = (props) => {
           <div>결제예정금액</div>
           <div>
             <em>
-              {props.productData
+              {props.cartData
                 .reduce(
                   (acc: number, curr: any) =>
                     curr.select === true ? acc + curr.price : acc,
@@ -36,7 +36,7 @@ const CartInfo: React.FC<CartDataProps> = (props) => {
           </div>
         </CartInfoPrice>
 
-        {props.productData.reduce(
+        {props.cartData.reduce(
           (acc: any, curr: any) => acc + curr.select,
           0
         ) === 0 ? (

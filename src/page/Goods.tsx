@@ -3,7 +3,6 @@ import styled from "styled-components";
 import GoodsMain from "../components/goods/GoodsMain";
 import GoodsDetail from "../components/goods/GoodsDetail";
 import GoodsDescription from "../components/goods/GoodsDescription";
-import axios from "axios";
 
 const Goods: React.FC = () => {
   return (

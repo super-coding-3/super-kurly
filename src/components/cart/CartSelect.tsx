@@ -7,7 +7,7 @@ import {
 } from "react-icons/io";
 
 interface CartDataProps {
-  productData: Array<object>;
+  cartData: Array<object>;
   allCheckBtnHandler: Function;
 }
 
@@ -19,10 +19,8 @@ const CartSelect: React.FC<CartDataProps> = (props) => {
   return (
     <CartSelectWrap>
       <CartSelectCheckBtn onClick={allCheckBtnHandler}>
-        {props.productData.reduce(
-          (acc: any, curr: any) => acc + curr.select,
-          0
-        ) != props.productData.length ? (
+        {props.cartData.reduce((acc: any, curr: any) => acc + curr.select, 0) !=
+        props.cartData.length ? (
           <IoIosCheckmarkCircleOutline
             color="rgb(221, 221, 221)"
             size="2.5em"
@@ -33,14 +31,14 @@ const CartSelect: React.FC<CartDataProps> = (props) => {
       </CartSelectCheckBtn>
       <CartSelectAllBtn>
         전체선택 (
-        {props.productData.reduce((count: any, product: any) => {
+        {props.cartData.reduce((count: any, product: any) => {
           if (product.select) {
             return count + 1;
           } else {
             return count;
           }
         }, 0)}
-        /{props.productData.length})
+        /{props.cartData.length})
       </CartSelectAllBtn>
     </CartSelectWrap>
   );
