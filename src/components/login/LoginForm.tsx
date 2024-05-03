@@ -1,90 +1,86 @@
-import * as React from "react";
+import React from "react";
 import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
 import { Formik, Field, Form, FormikHelpers, ErrorMessage } from "formik";
-import defaultSchema from "../../schema/index";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 import { MAIN_COLOR } from "./../../constans/color";
 
-interface FormValues {
-  userId: string;
+import { LoginSchema } from "../../schema/formSchema";
+
+interface LoginFormProps {
+  onLoginSuccess: () => void;
+}
+
+interface LoginValues {
+  email: string;
   password: string;
 }
 
-interface Values {
-  userId: string;
-  password: string;
-}
-
-function LoginForm(): JSX.Element {
+const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
   const navigate = useNavigate();
 
-  const onSubmitHandler = (
-    values: Values,
-    { setSubmitting }: FormikHelpers<Values>
+  const loginSubmitHandler = async (
+    values: LoginValues,
+    formikHelpers: FormikHelpers<LoginValues>
   ) => {
-    setTimeout(() => {
-      console.log("userId", values.userId, "password", values.password);
-      alert("로그인 성공!");
-      setSubmitting(false);
+    try {
+      const response = await axios.post(
+        "http://43.203.104.198:8080/api/member/login",
+        values
+      );
+      const token = response.data.data.token;
+      localStorage.setItem("token", token);
+      onLoginSuccess(); // 로그인 성공 시 상위 컴포넌트의 함수 호출
       navigate("/");
-    }, 500);
+    } catch (error) {
+      console.error(error);
+      alert("로그인 실패. 다시 시도해주세요.");
+    }
+    formikHelpers.setSubmitting(false);
   };
 
   return (
     <LoginFormik>
       <Formik
         initialValues={{
-          userId: "",
+          email: "",
           password: "",
         }}
-        validationSchema={defaultSchema} // 유효성 검사 스키마 추가
-        onSubmit={onSubmitHandler}
+        validationSchema={LoginSchema} // 유효성 검사 스키마 추가
+        onSubmit={loginSubmitHandler}
       >
         <Form>
-          <FormGroup>
-            <label htmlFor="login-user-id">유저아이디</label>
-            <Field
-              id="login-user-id"
-              name="userId"
-              type="text"
-              placeholder="아이디를 입력해주세요"
-            />
-            <ErrorMessage name="userId" component="div" className="error-ms" />
-          </FormGroup>
-
-          <FormGroup>
-            <label htmlFor="login-user-pw">유저비밀번호</label>
-            <Field
-              id="login-user-pw"
-              name="password"
-              type="password"
-              placeholder="비밀번호를 입력해주세요"
-            />
+          <LoginField>
+            <label htmlFor="email">이메일</label>
+            <Field type="email" id="email" name="email" />
+            <ErrorMessage name="email" component="div" className="error-ms" />
+          </LoginField>
+          <LoginField>
+            <label htmlFor="password">비밀번호</label>
+            <Field type="password" id="password" name="password" />
             <ErrorMessage
               name="password"
               component="div"
               className="error-ms"
             />
-          </FormGroup>
+          </LoginField>
+
           <FindLoginInfoWrap>
             <FindLoginInfo>
-              <li>
-                <BtnGo to={"/"}>아이디 찾기</BtnGo>
-              </li>
-              <li>
-                <BtnGo to={"/"}>비번 찾기</BtnGo>
-              </li>
+              <BtnGo to={"/"}>아이디 찾기</BtnGo>
+              <Bar />
+              <BtnGo to={"/"}>비번 찾기</BtnGo>
             </FindLoginInfo>
           </FindLoginInfoWrap>
 
           <BtnLoginSubmit type="submit">로그인</BtnLoginSubmit>
-          <BtnGoSignup to={"/"}>회원가입</BtnGoSignup>
+          <BtnGoSignup to={"/signup"}>회원가입</BtnGoSignup>
         </Form>
       </Formik>
     </LoginFormik>
   );
-}
+};
 
 const LoginFormik = styled.div`
   width: 340px;
@@ -108,7 +104,7 @@ const LoginFormik = styled.div`
   }
 `;
 
-const FormGroup = styled.div`
+const LoginField = styled.div`
   margin-bottom: 0.5rem;
 `;
 
@@ -148,14 +144,21 @@ const FindLoginInfoWrap = styled.div`
   margin-bottom: 28px;
 `;
 
-const FindLoginInfo = styled.ul`
+const FindLoginInfo = styled.div`
   margin-left: auto;
   display: flex;
   align-items: center;
   gap: 10px;
 `;
 
+const Bar = styled.div`
+  width: 1px;
+  height: 10px;
+  background: #888;
+`;
+
 const BtnGo = styled(Link)`
+  display: block;
   color: rgb(51, 51, 51);
   font-size: 12px;
 `;

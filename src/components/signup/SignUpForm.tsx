@@ -6,7 +6,7 @@ import axios from "axios";
 
 import { MAIN_COLOR } from "./../../constans/color";
 
-import defaultSchema from "../../schema/index";
+import { SignupSchema } from "../../schema/formSchema";
 import SignupFormGroup from "./SignUpFormGroup";
 import SignupFormGroupRadio from "./SignUpFormGroupRadio";
 import AgreementList from "./AgreementList";
@@ -31,7 +31,7 @@ interface Values {
 function SignUpForm(): JSX.Element {
   const navigate = useNavigate();
 
-  const onSubmitHandler = async (
+  const signupSubmitHandler = async (
     values: Values,
     { setSubmitting }: FormikHelpers<Values>
   ) => {
@@ -63,7 +63,7 @@ function SignUpForm(): JSX.Element {
       setSubmitting(true);
       setSubmitting(false);
       alert("축하합니다! 회원가입이 되었습니다");
-      // navigate("/");
+      navigate("/login"); // 회원가입 성공 후 로그인으로 이동
     } catch (error) {
       console.log(error);
       alert("회원가입에 실패했습니다. 다시 시도해주세요.");
@@ -94,8 +94,8 @@ function SignUpForm(): JSX.Element {
           agreement3: false,
           agreement4: false,
         }}
-        validationSchema={defaultSchema} // 유효성 검사 스키마 추가
-        onSubmit={onSubmitHandler}
+        validationSchema={SignupSchema} // 유효성 검사 스키마 추가
+        onSubmit={signupSubmitHandler}
       >
         {({ setFieldValue }) => (
           <Form>

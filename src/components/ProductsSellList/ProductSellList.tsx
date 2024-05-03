@@ -167,7 +167,7 @@ const ProductSellList: React.FC = () => {
                 {FindListData.map((item, index) => (
                   <FindListA
                     key={item.id}
-                    to={item.id === 4 ? "/productSellList" : "/"}
+                    to={item.id === 4 ? "/productSellList" : "/mypage"}
                   >
                     <img src={item.src} alt={item.alt} />
                     <FindListFontDiv>{item.text}</FindListFontDiv>

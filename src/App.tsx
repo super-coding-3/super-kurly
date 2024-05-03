@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/common/Header";
 import Login from "./page/Login";
@@ -12,11 +12,21 @@ import SellerOrder from "./components/sellerOrder/SellerOrder";
 import Mypage from "./page/Mypage";
 
 const App: React.FC = () => {
+  const [isLogin, setIsLogin] = useState(false);
+
+  const checkLoginStatus = () => {
+    const token = localStorage.getItem("token");
+    setIsLogin(!!token);
+  };
+
   return (
     <div className="App">
-      <Header />
+      <Header isLogin={isLogin} setIsLogin={setIsLogin} />
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/login"
+          element={<Login onLoginSuccess={checkLoginStatus} />}
+        />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/goods" element={<Goods />} />
         <Route path="/" element={<Main />} />

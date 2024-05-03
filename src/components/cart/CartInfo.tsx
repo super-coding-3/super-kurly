@@ -1,8 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { MAIN_COLOR } from "../../constans/color";
 
-const CartInfo = () => {
+interface CartDataProps {
+  productData: Array<object>;
+}
+
+const CartInfo: React.FC<CartDataProps> = (props) => {
   return (
     <CartInfoFragment>
       <CartInfoWrap>
@@ -12,15 +17,33 @@ const CartInfo = () => {
             <div>배송지</div>
           </CartInfoDeliveryTitle>
           <CartInfoDeliveryAddr>서울 마포구 어쩌구</CartInfoDeliveryAddr>
-          <CartInfoDeliveryBtn>배송지 변경</CartInfoDeliveryBtn>
+          <CartInfoDeliveryBtn to="/mypage">배송지 변경</CartInfoDeliveryBtn>
         </CartInfoDelivery>
         <CartInfoPrice>
           <div>결제예정금액</div>
           <div>
-            <em>30,900</em>원
+            <em>
+              {props.productData
+                .reduce(
+                  (acc: number, curr: any) =>
+                    curr.select === true ? acc + curr.price : acc,
+                  0
+                )
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            </em>
+            원
           </div>
         </CartInfoPrice>
-        <CartInfoBtn to="/order">주문하기</CartInfoBtn>
+
+        {props.productData.reduce(
+          (acc: any, curr: any) => acc + curr.select,
+          0
+        ) === 0 ? (
+          <CartInfoBtnOff>상품을 선택해주세요</CartInfoBtnOff>
+        ) : (
+          <CartInfoBtnOn to="/order"> 주문하기</CartInfoBtnOn>
+        )}
         <CartInfoText>쿠폰/적립금은 주문서에서 사용 가능합니다</CartInfoText>
         <CartInfoText>
           [주문완료] 상태일 경우에만 주문 취소 가능합니다.
@@ -47,16 +70,28 @@ export default CartInfo;
 
 const CartInfoFragment = styled.div`
   position: relative;
-  width: 284px;
+  /* width: 284px; */
+  @media screen and (max-width: 20000px) {
+    max-width: 284px;
+  }
+  @media screen and (max-width: 1050px) {
+    max-width: 184px;
+  }
+  @media screen and (max-width: 800px) {
+    max-width: 560px;
+  }
 `;
 
 const CartInfoWrap = styled.div`
   position: sticky;
   top: 0;
   padding-top: 60px;
+  width: 100%;
 `;
 
 const CartInfoDelivery = styled.div`
+  display: flex;
+  flex-direction: column;
   padding: 23px 19px 20px;
   border: 1px solid rgb(242, 242, 242);
   font-size: 16px;
@@ -72,15 +107,16 @@ const CartInfoDeliveryAddr = styled.div`
   padding-top: 20px;
 `;
 
-const CartInfoDeliveryBtn = styled.button`
+const CartInfoDeliveryBtn = styled(Link)`
   font-size: 12px;
   margin-top: 20px;
   width: 100%;
   line-height: 36px;
   border-radius: 3px;
-  color: rgb(95, 0, 128);
+  color: ${MAIN_COLOR};
   background-color: rgb(255, 255, 255);
-  border: 1px solid rgb(95, 0, 128);
+  border: 1px solid ${MAIN_COLOR};
+  text-align: center;
 `;
 
 const CartInfoPrice = styled.div`
@@ -97,7 +133,7 @@ const CartInfoPrice = styled.div`
   }
 `;
 
-const CartInfoBtn = styled(Link)`
+const CartInfoBtnOn = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -107,7 +143,20 @@ const CartInfoBtn = styled(Link)`
   height: 56px;
   border-radius: 3px;
   color: rgb(255, 255, 255);
-  background-color: rgb(95, 0, 128);
+  background-color: ${MAIN_COLOR};
+`;
+
+const CartInfoBtnOff = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  font-weight: 700;
+  width: 100%;
+  height: 56px;
+  border-radius: 3px;
+  color: rgb(255, 255, 255);
+  background-color: rgb(221, 221, 221);
 `;
 
 const CartInfoText = styled.div`
