@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 
-interface FormValues {
+interface SignupFormValues {
   email: string;
   password: string;
   passwordConfirm: string;
@@ -11,7 +11,12 @@ interface FormValues {
   brith: string;
 }
 
-const defaultSchema: Yup.ObjectSchema<FormValues> = Yup.object().shape({
+interface LoginFormValues {
+  email: string;
+  password: string;
+}
+
+const SignupSchema: Yup.ObjectSchema<SignupFormValues> = Yup.object().shape({
   email: Yup.string()
     .email("유효한 이메일 주소를 입력해주세요")
     .required("이메일을 입력해주세요"),
@@ -28,7 +33,6 @@ const defaultSchema: Yup.ObjectSchema<FormValues> = Yup.object().shape({
   userName: Yup.string()
     .required("이름을 입력해주세요")
     .matches(/^[가-힣]+$/, "이름은 한글로만 입력해주세요"),
-
   phone: Yup.string()
     .required("전화번호를 입력해주세요")
     .matches(
@@ -42,4 +46,11 @@ const defaultSchema: Yup.ObjectSchema<FormValues> = Yup.object().shape({
   brith: Yup.string().required("yy/mm/dd"),
 });
 
-export default defaultSchema;
+const LoginSchema: Yup.ObjectSchema<LoginFormValues> = Yup.object().shape({
+  email: Yup.string()
+    .email("유효한 이메일 주소를 입력해주세요")
+    .required("이메일을 입력해주세요"),
+  password: Yup.string().required("비밀번호를 입력해주세요"),
+});
+
+export { SignupSchema, LoginSchema };
