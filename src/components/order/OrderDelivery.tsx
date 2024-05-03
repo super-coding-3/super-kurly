@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import OrderTitle from "./OrderTitle";
 import OrderRowKey from "./OrderRowKey";
+import { MAIN_COLOR } from "../../constans/color";
 
 const OrderDelivery: React.FC = () => {
   return (
@@ -11,15 +12,8 @@ const OrderDelivery: React.FC = () => {
         <OrderRowKey row="배송지" />
         <OrderDeliveryAddr>
           <div>서울 마포구 어쩌구</div>
-          <button>변경</button>
+          <a href="/mypage">변경</a>
         </OrderDeliveryAddr>
-      </OrderDeliveryRow>
-      <OrderDeliveryRow>
-        <OrderRowKey row="배송 요청사항" />
-        <OrderDeliveryReq>
-          <div>배송 요청사항을 입력해주세요</div>
-          <button>입력</button>
-        </OrderDeliveryReq>
       </OrderDeliveryRow>
     </OrderDeliveryWrap>
   );
@@ -40,21 +34,14 @@ const OrderDeliveryRow = styled.div`
 
 const OrderDeliveryAddr = styled.div`
   color: rgb(51, 51, 51);
-  button {
+  a {
+    margin-bottom: 20px;
+    display: block;
     width: 60px;
     line-height: 30px;
+    text-align: center;
     border-radius: 3px;
-    border: 1px solid rgb(221, 221, 221);
-  }
-`;
-
-const OrderDeliveryReq = styled.div`
-  color: rgb(240, 63, 64);
-  button {
-    width: 60px;
-    line-height: 30px;
-    border-radius: 3px;
-    color: rgb(95, 0, 128);
-    border: 1px solid rgb(95, 0, 128);
+    color: ${MAIN_COLOR};
+    border: 1px solid ${MAIN_COLOR};
   }
 `;

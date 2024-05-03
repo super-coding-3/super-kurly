@@ -1,46 +1,65 @@
+interface ProductDataType {
+  id: string;
+  img: string;
+  title: string;
+  price: number;
+  delivery: string;
+  seller: string;
+  origin: string;
+  option: string;
+  stock: number;
+  select: boolean;
+}
+
 export const ProductData = () => {
-  const ProductData = [
+  let ProductData: ProductDataType[] = [
     {
-      img: "https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240424/4cbbd57f-6344-4efa-8c61-c8fce2cb0be8.jpg",
-      product: "[비비고] 왕교자 455G*2",
+      id: "product_1",
+      img: "https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=720,height=936,quality=85/product/image/a67c9c98-39a1-4018-ab75-5dc1a8402c3a.jpg",
       title: "[비비고x고메] 간편식 골라담기 9종 (택1)",
-      amount: 1,
-      price: "7,150원",
+      price: 7150,
+      delivery: "샛별배송",
+      seller: "컬리",
+      origin: "상품설명/상세정보 참조",
+      option: "간편식1",
+      stock: 10,
+      select: false,
     },
     {
-      img: "https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240425/f82b8e12-7669-47ea-860c-b202e75ad696.jpg",
-      product: "[쿳킷x비비고] 왕교자 사골 떡만두국",
+      id: "product_2",
+      img: "https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=720,height=936,quality=85/product/image/a67c9c98-39a1-4018-ab75-5dc1a8402c3a.jpg",
       title: "[비비고x고메] 간편식 골라담기 9종 (택1)",
-      amount: 2,
-      price: "6,980원",
+      price: 7150,
+      delivery: "샛별배송",
+      seller: "컬리",
+      origin: "상품설명/상세정보 참조",
+      option: "간편식1",
+      stock: 10,
+      select: false,
     },
     {
-      img: "https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240424/4cbbd57f-6344-4efa-8c61-c8fce2cb0be8.jpg",
-      product: "[비비고] 왕교자 455G*2",
+      id: "product_3",
+      img: "https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=720,height=936,quality=85/product/image/a67c9c98-39a1-4018-ab75-5dc1a8402c3a.jpg",
       title: "[비비고x고메] 간편식 골라담기 9종 (택1)",
-      amount: 1,
-      price: "7,150원",
+      price: 7150,
+      delivery: "샛별배송",
+      seller: "컬리",
+      origin: "상품설명/상세정보 참조",
+      option: "간편식1",
+      stock: 10,
+      select: false,
     },
     {
-      img: "https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240425/f82b8e12-7669-47ea-860c-b202e75ad696.jpg",
-      product: "[쿳킷x비비고] 왕교자 사골 떡만두국",
+      id: "product_4",
+      img: "https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=720,height=936,quality=85/product/image/a67c9c98-39a1-4018-ab75-5dc1a8402c3a.jpg",
       title: "[비비고x고메] 간편식 골라담기 9종 (택1)",
-      amount: 2,
-      price: "6,980원",
-    },
-    {
-      img: "https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240424/4cbbd57f-6344-4efa-8c61-c8fce2cb0be8.jpg",
-      product: "[비비고] 왕교자 455G*2",
-      title: "[비비고x고메] 간편식 골라담기 9종 (택1)",
-      amount: 1,
-      price: "7,150원",
-    },
-    {
-      img: "https://img-cf.kurly.com/cdn-cgi/image/width=240,height=240,fit=crop,quality=85/shop/data/review/20240425/f82b8e12-7669-47ea-860c-b202e75ad696.jpg",
-      product: "[쿳킷x비비고] 왕교자 사골 떡만두국",
-      title: "[비비고x고메] 간편식 골라담기 9종 (택1)",
-      amount: 2,
-      price: "6,980원",
+      price: 7150,
+      delivery: "샛별배송",
+      seller: "컬리",
+      origin: "상품설명/상세정보 참조",
+      option: "간편식1",
+      stock: 10,
+      select: false,
     },
   ];
   return ProductData;

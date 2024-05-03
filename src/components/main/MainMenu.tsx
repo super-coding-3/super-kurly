@@ -130,7 +130,48 @@ const MainMenu = () => {
         { id: 32, name: "갑각류" },
       ],
     },
+    {
+      id: 4,
+      name: "정육",
+      subcategories: [
+        { id: 41, name: "한우" },
+        { id: 42, name: "돼지고기" },
+      ],
+    },
+    {
+      id: 5,
+      name: "음료",
+      subcategories: [
+        { id: 51, name: "생수" },
+        { id: 52, name: "탄산음료" },
+      ],
+    },
+    {
+      id: 6,
+      name: "간식",
+      subcategories: [
+        { id: 61, name: "과자" },
+        { id: 62, name: "아이스크림" },
+      ],
+    },
+    {
+      id: 7,
+      name: "유제품",
+      subcategories: [
+        { id: 71, name: "우유" },
+        { id: 72, name: "요거트" },
+      ],
+    },
+    {
+      id: 8,
+      name: "냉동식품",
+      subcategories: [
+        { id: 81, name: "냉동피자" },
+        { id: 82, name: "냉동만두" },
+      ],
+    },
   ];
+
   const [categories, setCategories] = useState(mockData);
 
   //   //   카테고리 데이터 받아오는 함수

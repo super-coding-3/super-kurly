@@ -27,10 +27,24 @@ export default GoodsDetail;
 
 const GoodsDetailWrap = styled.div`
   margin-top: 100px;
+  width: 1010px;
+  @media screen and (max-width: 1050px) {
+    width: 742px;
+  }
+  @media screen and (max-width: 742px) {
+    width: 560px;
+  }
+  @media screen and (max-width: 560px) {
+    width: 340px;
+  }
 `;
 
 const GooodsDetailImg = styled.div`
   margin-top: 50px;
+  text-align: center;
+  img {
+    width: 60%;
+  }
 `;
 
 const GoodsDetailInfo = styled.div`
@@ -48,15 +62,19 @@ const GoodsDetailInfo = styled.div`
     margin-top: 30px;
     font-size: 13px;
     color: rgb(51, 51, 51);
+    width: 100%;
   }
   li {
     padding: 18px 18px;
+    @media screen and (max-width: 560px) {
+      padding: 10px 10px;
+    }
   }
   .title {
-    width: 180px;
+    width: 18%;
     background-color: rgb(247, 247, 247);
   }
   .contents {
-    width: 325px;
+    width: 32%;
   }
 `;

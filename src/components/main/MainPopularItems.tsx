@@ -5,7 +5,7 @@ import { GrPrevious } from "react-icons/gr";
 import { BsChatSquareText } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { MAIN_COLOR, MAIN_LIGHT_COLOR } from "../../constans/color";
+import { MAIN_COLOR } from "../../constans/color";
 
 const mockData = [
   {
@@ -277,20 +277,20 @@ const CustomGrNext = styled(GrNext)`
 
 const MainPopularItems = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-  //   const [itemsData, setItemsData] = useState([]);
+  const [itemsData, setItemsData] = useState([]);
 
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       try {
-  //         const response = await axios.get("api_endpoint");
-  //         setItemsData(response.data);
-  //       } catch (error) {
-  //         console.error("Error fetching data:", error);
-  //       }
-  //     };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get("api_endpoint");
+  //       setItemsData(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
 
-  //     fetchData();
-  //   }, []);
+  //   fetchData();
+  // }, []);
 
   const handleNextSlide = () => {
     setCurrentIndex(currentIndex + 1);
@@ -324,7 +324,7 @@ const MainPopularItems = () => {
         )}
         <PopularItemsContentContainer>
           {currentItems.map((item) => (
-            <PopularItemsGridContainer>
+            <PopularItemsGridContainer key={item.id}>
               <PopularItemsContentWrapper key={item.id}>
                 <PopularItemsImgWrapper>
                   <img src={item.image} alt={item.name} />

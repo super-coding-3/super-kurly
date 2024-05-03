@@ -3,6 +3,8 @@ import { IoMdPaper } from "react-icons/io";
 import { RiCoupon3Line } from "react-icons/ri";
 import { GoHeart } from "react-icons/go";
 import { LiaShoppingBagSolid } from "react-icons/lia";
+import { useNavigate } from "react-router-dom";
+import ProductSellList from "../ProductsSellList/ProductSellList";
 
 interface MypageFrequentMenuProps {
   onSelectMenu: (menu: string) => void;
@@ -89,18 +91,6 @@ const OtherMenuWrapper = styled.div`
   cursor: pointer;
 `;
 
-// const ShoppingWrapper = styled.div`
-//   width: 325px;
-//   width: 250px;
-//   padding: 12px 0px 16px;
-// `;
-
-// const BenefitWrapper = styled.div`
-//   width: 325px;
-//   height: 113px;
-//   padding: 12px 0px 16px;
-// `;
-
 const ManageInfoWrapper = styled.div`
   width: 325px;
   height: 205px;
@@ -115,34 +105,40 @@ const ServiceGuideWrapper = styled.div`
 const MypageFrequentMenu: React.FC<MypageFrequentMenuProps> = ({
   onSelectMenu,
 }) => {
-  const handleOrderHistoryHandler = () => {
+  const navigate = useNavigate();
+
+  const OrderHistoryHandler = () => {
     onSelectMenu("order");
   };
 
-  const handleCouponHandler = () => {
+  const CouponHandler = () => {
     onSelectMenu("coupon");
   };
 
-  const handleAddressHandler = () => {
+  const AddressHandler = () => {
     onSelectMenu("address");
+  };
+
+  const ProductSellHandler = () => {
+    navigate("/ProductSellList");
   };
 
   return (
     <FrequentMenuContainer>
       <FrequentMenuWrapper>
         <MenuHeading>자주찾는 메뉴</MenuHeading>
-        <FrequentMenuOptions onClick={handleOrderHistoryHandler}>
+        <FrequentMenuOptions onClick={OrderHistoryHandler}>
           <CustomIoMdPaper />
           주문 내역
         </FrequentMenuOptions>
-        <FrequentMenuOptions onClick={handleCouponHandler}>
+        <FrequentMenuOptions onClick={CouponHandler}>
           <CustomRiCoupon3Line />
           쿠폰
         </FrequentMenuOptions>
-        <FrequentMenuOptions>
+        <FrequentMenuOptions onClick={ProductSellHandler}>
           <CustomGoHeart />내 판매 상품
         </FrequentMenuOptions>
-        <FrequentMenuOptions>
+        <FrequentMenuOptions onClick={ProductSellHandler}>
           <CustomLiaShoppingBagSolid />
           판매 상품 등록
         </FrequentMenuOptions>
@@ -151,20 +147,9 @@ const MypageFrequentMenu: React.FC<MypageFrequentMenuProps> = ({
         <img src="/img/mypage/kurly-mypage-banner.jpg" alt="mypage-banner" />
       </BannerWrppaer>
       <OtherMenuWrapper>
-        {/* <ShoppingWrapper>
-          <MenuHeading>쇼핑</MenuHeading>
-          <MenuOptions>결제수단, 컬리페이</MenuOptions>
-          <MenuOptions>상품 후기</MenuOptions>
-          <MenuOptions>선물 내역</MenuOptions>
-          <MenuOptions>상품 문의</MenuOptions>
-        </ShoppingWrapper>
-        <BenefitWrapper>
-          <MenuHeading>혜택</MenuHeading>
-          <MenuOptions>컬리멤버스</MenuOptions>
-        </BenefitWrapper> */}
         <ManageInfoWrapper>
           <MenuHeading>내 정보관리</MenuHeading>
-          <MenuOptions onClick={handleAddressHandler}>배송지 관리</MenuOptions>
+          <MenuOptions onClick={AddressHandler}>배송지 관리</MenuOptions>
           <MenuOptions>나의 컬리스타일</MenuOptions>
           <MenuOptions>개인정보 수정</MenuOptions>
         </ManageInfoWrapper>
