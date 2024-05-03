@@ -1,4 +1,4 @@
-interface ProductDataType {
+interface CartDataType {
   id: string;
   img: string;
   title: string;
@@ -7,12 +7,13 @@ interface ProductDataType {
   seller: string;
   origin: string;
   option: string;
+  amount: number;
   stock: number;
   select: boolean;
 }
 
-export const ProductData = () => {
-  let ProductData: ProductDataType[] = [
+export const CartData = () => {
+  let CartData: CartDataType[] = [
     {
       id: "product_1",
       img: "https://product-image.kurly.com/cdn-cgi/image/fit=crop,width=720,height=936,quality=85/product/image/a67c9c98-39a1-4018-ab75-5dc1a8402c3a.jpg",
@@ -22,6 +23,7 @@ export const ProductData = () => {
       seller: "컬리",
       origin: "상품설명/상세정보 참조",
       option: "간편식1",
+      amount: 1,
       stock: 10,
       select: false,
     },
@@ -34,6 +36,7 @@ export const ProductData = () => {
       seller: "컬리",
       origin: "상품설명/상세정보 참조",
       option: "간편식1",
+      amount: 1,
       stock: 10,
       select: false,
     },
@@ -46,6 +49,7 @@ export const ProductData = () => {
       seller: "컬리",
       origin: "상품설명/상세정보 참조",
       option: "간편식1",
+      amount: 1,
       stock: 10,
       select: false,
     },
@@ -58,9 +62,10 @@ export const ProductData = () => {
       seller: "컬리",
       origin: "상품설명/상세정보 참조",
       option: "간편식1",
+      amount: 1,
       stock: 10,
       select: false,
     },
   ];
-  return ProductData;
+  return CartData;
 };

@@ -3,7 +3,6 @@ import styled from "styled-components";
 import OrderedProductTitle from "../common/OrderedProductTitle";
 
 interface OrderDataProps {
-  // orderData: Array<object>;
   orderData: any;
 }
 
@@ -25,14 +24,18 @@ const OrderProduct: React.FC<OrderDataProps> = (props) => {
                 <div id="productName">{data.title}</div>
                 <div id="productTitle">{data.option}</div>
               </div>
-              {/* TODO 장바구니의 수량으로 변경 필요 */}
-              <div>{data.stock}</div>
+              <div>{data.amount}</div>
               <div id="price">
-                {data.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                {data.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 원
               </div>
             </OrderProductContentsDrop>
           );
         })
+      ) : props.orderData.length === 1 ? (
+        <OrderProductContents>
+          {" "}
+          {props.orderData[0].title} 상품을 주문합니다.{" "}
+        </OrderProductContents>
       ) : (
         <OrderProductContents>
           {props.orderData[0].title} 외 {props.orderData.length - 1}개 상품을

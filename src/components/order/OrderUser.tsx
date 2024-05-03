@@ -3,22 +3,27 @@ import styled from "styled-components";
 import OrderTitle from "./OrderTitle";
 import OrderRowKey from "./OrderRowKey";
 
-const OrderUser: React.FC = () => {
+interface OrderDataProps {
+  name: string;
+  phone: string;
+  email: string;
+}
+
+const OrderUser: React.FC<OrderDataProps> = (props) => {
   return (
     <OrderUserWrap>
       <OrderTitle title="주문자 정보" />
       <OrderUserRow>
         <OrderRowKey row="보내는 분" />
-        <OrderUserValue>이효경</OrderUserValue>
+        <OrderUserValue>{props.name}</OrderUserValue>
       </OrderUserRow>
       <OrderUserRow>
         <OrderRowKey row="휴대폰" />
-        <OrderUserValue>010-5574-2469</OrderUserValue>
+        <OrderUserValue>{props.phone}</OrderUserValue>
       </OrderUserRow>
       <OrderUserRow>
         <OrderRowKey row="이메일" />
-        {/* <OrderUserKey>이메일</OrderUserKey> */}
-        <OrderUserValue>as167@naver.com</OrderUserValue>
+        <OrderUserValue>{props.email}</OrderUserValue>
       </OrderUserRow>
     </OrderUserWrap>
   );

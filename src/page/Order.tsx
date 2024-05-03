@@ -6,7 +6,8 @@ import OrderDelivery from "../components/order/OrderDelivery";
 import OrderPrivacy from "../components/order/OrderPrivacy";
 import OrderPrice from "../components/order/OrderPrice";
 import { MAIN_COLOR } from "../constans/color";
-import { ProductData } from "../components/common/data/ProductData";
+import { CartData } from "../components/common/data/CartData";
+import { UserData } from "../components/common/data/UserData";
 
 const Order: React.FC = () => {
   const orderPaymentBtnHandler = () => {
@@ -16,15 +17,19 @@ const Order: React.FC = () => {
   return (
     <OrderFragment>
       <OrderTitle>주문서</OrderTitle>
-      <OrderProduct orderData={ProductData()} />
+      <OrderProduct orderData={CartData()} />
       <OrderWrap>
         <OrderDetail>
-          <OrderUser />
-          <OrderDelivery />
+          <OrderUser
+            name={UserData().name}
+            phone={UserData().phone}
+            email={UserData().email}
+          />
+          <OrderDelivery address={UserData().address} />
           <OrderPrivacy />
           <OrderPaymentBtn>
             <button onClick={orderPaymentBtnHandler}>
-              {ProductData()
+              {CartData()
                 .reduce((acc: number, curr: any) => acc + curr.price, 0)
                 .toString()
                 .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
@@ -32,7 +37,7 @@ const Order: React.FC = () => {
             </button>
           </OrderPaymentBtn>
         </OrderDetail>
-        <OrderPrice orderData={ProductData()} />
+        <OrderPrice orderData={CartData()} />
       </OrderWrap>
     </OrderFragment>
   );

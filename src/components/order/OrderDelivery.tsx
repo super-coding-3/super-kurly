@@ -4,14 +4,18 @@ import OrderTitle from "./OrderTitle";
 import OrderRowKey from "./OrderRowKey";
 import { MAIN_COLOR } from "../../constans/color";
 
-const OrderDelivery: React.FC = () => {
+interface OrderDataProps {
+  address: string;
+}
+
+const OrderDelivery: React.FC<OrderDataProps> = (props) => {
   return (
     <OrderDeliveryWrap>
       <OrderTitle title="배송 정보" />
       <OrderDeliveryRow>
         <OrderRowKey row="배송지" />
         <OrderDeliveryAddr>
-          <div>서울 마포구 어쩌구</div>
+          <div>{props.address}</div>
           <a href="/mypage">변경</a>
         </OrderDeliveryAddr>
       </OrderDeliveryRow>

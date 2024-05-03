@@ -10,11 +10,16 @@ import {
 import OrderedProductAmount from "../common/OrderedProductAmount";
 import { MAIN_COLOR } from "../../constans/color";
 
+import { FaPlus } from "react-icons/fa6";
+import { FaMinus } from "react-icons/fa6";
+
 interface CartDataProps {
-  productData: Array<object>;
+  cartData: Array<object>;
   productSelectHandler: Function;
   productDeleteHandler: Function;
   allCheckBtnHandler: Function;
+  amountMinusHandler: Function;
+  amountPlusHandler: Function;
 }
 
 const CartList: React.FC<CartDataProps> = (props) => {
@@ -29,10 +34,18 @@ const CartList: React.FC<CartDataProps> = (props) => {
     props.productDeleteHandler(id);
   };
 
+  const amountMinusHandler = (index: number, amount: number) => {
+    props.productDeleteHandler(index, amount);
+  };
+
+  const amountPlusHandler = (index: number, amount: number, stock: number) => {
+    props.productDeleteHandler(index, amount, stock);
+  };
+
   return (
     <CartListWrap>
       <CartSelect
-        productData={props.productData}
+        cartData={props.cartData}
         allCheckBtnHandler={props.allCheckBtnHandler}
       />
       <CartProduct>
@@ -41,7 +54,7 @@ const CartList: React.FC<CartDataProps> = (props) => {
           setproductDropBar={setproductDropBar}
         />
         {productDropBar &&
-          props.productData.map((data: any, index: number) => {
+          props.cartData.map((data: any, index: number) => {
             return (
               <CartProductList>
                 <CartListFirst>
@@ -66,11 +79,31 @@ const CartList: React.FC<CartDataProps> = (props) => {
                   </CartProductDiv>
                 </CartListFirst>
                 <CartListSecond>
-                  <OrderedProductAmount
-                    amount={productAmount}
-                    setAmount={setproductAmount}
-                    stock={data.stock}
-                  />
+                  <CartListAmount>
+                    <CartListAmountMinus
+                      onClick={() => {
+                        amountMinusHandler(index, data.amount);
+                      }}
+                    >
+                      {data.amount === 1 ? (
+                        <FaMinus color="#dddddd" />
+                      ) : (
+                        <FaMinus />
+                      )}
+                    </CartListAmountMinus>
+                    <div>{data.amount}</div>
+                    <CartListAmountPlus
+                      onClick={() => {
+                        amountPlusHandler(index, data.amount, data.stock);
+                      }}
+                    >
+                      {data.amount === data.stock ? (
+                        <FaPlus color="#dddddd" />
+                      ) : (
+                        <FaPlus />
+                      )}
+                    </CartListAmountPlus>
+                  </CartListAmount>
                   <div id="price">
                     {data.price
                       .toString()
@@ -90,7 +123,7 @@ const CartList: React.FC<CartDataProps> = (props) => {
           })}
       </CartProduct>
       <CartSelect
-        productData={props.productData}
+        cartData={props.cartData}
         allCheckBtnHandler={props.allCheckBtnHandler}
       />
     </CartListWrap>
@@ -169,4 +202,23 @@ const CartListSecond = styled.div`
     gap: 60px;
     margin-top: 25px;
   }
+`;
+
+const CartListAmount = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px solid rgb(221, 223, 225);
+  width: 88px;
+  border-radius: 3px;
+  height: 30px;
+`;
+const CartListAmountMinus = styled.button`
+  width: 13px;
+  height: 13px;
+`;
+
+const CartListAmountPlus = styled.button`
+  width: 13px;
+  height: 13px;
 `;
