@@ -19,6 +19,7 @@ Back-end : 제공된 API 활용
 
 <br/>
 <br/>
+
 ## 채택한 개발 기술과 브랜치 전략
 ### React, Typescript , Styled Componets
 
