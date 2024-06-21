@@ -9,13 +9,13 @@
 <br/>
 
 ## 개발 환경
-Front : HTML, React, Typescript, styled compoents,
-Back-end : 제공된 API 활용
-버전 및 이슈관리 : Github,
-협업 툴 : Discord, Notion,
-서비스 배포 환경 : Varcel
-커밋 컨벤션
-네이밍 컨벤션
+#### Front : HTML, React, Typescript, styled compoents,<br/>
+#### Back-end : 제공된 API 활용 <br/>
+#### 버전 및 이슈관리 : Github,<br/>
+#### 협업 툴 : Discord, Notion,<br/>
+#### 서비스 배포 환경 : Varcel<br/>
+#### 커밋 컨벤션 <br/>
+#### 네이밍 컨벤션 <br/>
 
 <br/>
 <br/>
